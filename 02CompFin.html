@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="第3回 NumpyとPandas（金融時系列データ）" href="03CompFin.html" />
     <link rel="prev" title="第1回 Pythonの基礎1" href="01CompFin.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -87,7 +88,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to your Jupyter Book
+   コンピュテーショナル・ファイナンス
   </a>
  </li>
 </ul>
@@ -100,6 +101,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
   </a>
  </li>
 </ul>
@@ -154,22 +160,6 @@ const thebe_selector_output = ".output, .cell_output"
 
             <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="ソースリポジトリ"><i
-                    class="fab fa-github"></i>リポジトリ</button></a>
-        <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F02CompFin.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="問題を開く"><i class="fas fa-lightbulb"></i>未解決の問題</button></a>
-        
-    </div>
-</div>
-
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -184,7 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/02CompFin.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/02CompFin.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -871,19 +861,27 @@ Hello
 <h2>モンテカルロ法<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>Black-Scholesモデルの仮定の下では、<span class="math notranslate nohighlight">\(T\)</span>時点における株価<span class="math notranslate nohighlight">\(S(T)\)</span>は（リスク中立確率の下で）</p>
 <div class="math notranslate nohighlight">
-\[S(T) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} z\right\}\]</div>
+\[
+S(T) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} z\right\}
+\]</div>
 <p>に従う。ここで、<span class="math notranslate nohighlight">\(S_0\)</span>は時点0（現時点）の株価、<span class="math notranslate nohighlight">\(\sigma\)</span>はボラティリティ、<span class="math notranslate nohighlight">\(r\)</span>は無リスク金利、<span class="math notranslate nohighlight">\(z\)</span>は標準正規分布（確率変数）。</p>
 <p>このとき、権利行使価格<span class="math notranslate nohighlight">\(K\)</span>のヨーロピアンコールオプションの価格は</p>
 <div class="math notranslate nohighlight">
-\[e^{-rT}E[(S(T) - K)^+]  \tag{1} \]</div>
+\[
+e^{-rT}E[(S(T) - K)^+]  \tag{1} 
+\]</div>
 <p>により計算できる。ここで、<span class="math notranslate nohighlight">\((x)^+ = \max\{x, 0\}\)</span>である。
 <span class="math notranslate nohighlight">\((1)\)</span>は解析的に計算できて、いわゆるBlack-Scholes公式が導かれる。</p>
 <p>ここではあえて、<span class="math notranslate nohighlight">\((1)\)</span>をモンテカルロ法によって計算をしてみる。
 <span class="math notranslate nohighlight">\(z_1, z_2, \dots, z_N\)</span>を標準正規分布からの標本とすると、<span class="math notranslate nohighlight">\((1)\)</span>は</p>
 <div class="math notranslate nohighlight">
-\[\frac{1}{N} e^{-rT}\sum_{i=1}^N (S_i(T) - K)^+\]</div>
+\[
+\frac{1}{N} e^{-rT}\sum_{i=1}^N (S_i(T) - K)^+
+\]</div>
 <div class="math notranslate nohighlight">
-\[S_i(T) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} z_i\right\}\]</div>
+\[
+S_i(T) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} z_i\right\}
+\]</div>
 <p>により近似できる。</p>
 <p>具体的には以下のようにする。
 <span class="math notranslate nohighlight">\(i=1,2,\dots,N\)</span>について以下の1-4の計算をする。Nは生成する標本の数。</p>
@@ -1023,6 +1021,13 @@ Analytical solution: 1.649
             <p class="prev-next-title">第1回 Pythonの基礎1</p>
         </div>
     </a>
+    <a class='right-next' id="next-link" href="03CompFin.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第3回 NumpyとPandas（金融時系列データ）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>
@@ -1030,7 +1035,7 @@ Analytical solution: 1.649
     <footer class="footer">
   <p>
     
-      著者 上村昌司<br/>
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
     
         &copy; Copyright 2021.<br/>
   </p>

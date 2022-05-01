@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="第2回 Pyhtonの基礎2" href="02CompFin.html" />
-    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+    <link rel="prev" title="コンピュテーショナル・ファイナンス" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -88,7 +88,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Welcome to your Jupyter Book
+   コンピュテーショナル・ファイナンス
   </a>
  </li>
 </ul>
@@ -101,6 +101,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="02CompFin.html">
    第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
   </a>
  </li>
 </ul>
@@ -155,22 +160,6 @@ const thebe_selector_output = ".output, .cell_output"
 
             <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="ソースリポジトリ"><i
-                    class="fab fa-github"></i>リポジトリ</button></a>
-        <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F01CompFin.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="問題を開く"><i class="fas fa-lightbulb"></i>未解決の問題</button></a>
-        
-    </div>
-</div>
-
             <!-- Full screen (wrap in <a> to have style consistency -->
 
 <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -185,7 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/01CompFin.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/01CompFin.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -565,7 +554,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p><span class="math notranslate nohighlight">\(x\)</span>についての2次方程式 <span class="math notranslate nohighlight">\(ax^2+bx +c=0\)</span>の解は</p>
 <div class="math notranslate nohighlight">
-\[x = \frac{-b - \sqrt{b^2-4ac}}{2a}, \frac{-b + \sqrt{b^2-4ac}}{2a}\]</div>
+\[
+x = \frac{-b - \sqrt{b^2-4ac}}{2a}, \frac{-b + \sqrt{b^2-4ac}}{2a}
+\]</div>
 <p>により計算できる。<span class="math notranslate nohighlight">\(a, b, c\)</span>を入力し2次方程式の解を出力するプログラムを書け。平方根は<code class="docutils literal notranslate"><span class="pre">math.sqrt</span></code>で計算できる。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -589,9 +580,11 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Black-Scholes式<a class="headerlink" href="#black-scholes" title="Permalink to this headline">¶</a></h3>
 <p>ヨーロピアンコールオプションの価格<span class="math notranslate nohighlight">\(C\)</span>は</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}C = S N(d_1) - K e^{-rT} N(d_2)\\
+\[\begin{split}
+C = S N(d_1) - K e^{-rT} N(d_2)\\
 d_1 = \frac{\ln(S/K) + (r -\sigma^2/2)T}{\sigma \sqrt{T}}\\
-d_2 = d_1 - \sigma \sqrt{T}\end{split}\]</div>
+d_2 = d_1 - \sigma \sqrt{T}
+\end{split}\]</div>
 <p>によって計算できる。
 ここで、<span class="math notranslate nohighlight">\(S\)</span>は現在の原資産価格、<span class="math notranslate nohighlight">\(K\)</span>は権利行使価格、<span class="math notranslate nohighlight">\(T\)</span>は満期までの時間、<span class="math notranslate nohighlight">\(r\)</span>は無リスク金利、<span class="math notranslate nohighlight">\(\sigma\)</span>は原資産のボラティリティ、<span class="math notranslate nohighlight">\(N()\)</span>は標準正規分布の分布関数を表す。</p>
 <p>標準正規分布の分布関数は <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">scipy.stats</span> <span class="pre">import</span> <span class="pre">norm</span></code>としてから、<code class="docutils literal notranslate"><span class="pre">norm.cdf</span></code>を使えばよい。</p>
@@ -651,7 +644,7 @@ d_2 = d_1 - \sigma \sqrt{T}\end{split}\]</div>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to your Jupyter Book</p>
+            <p class="prev-next-title">コンピュテーショナル・ファイナンス</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="02CompFin.html" title="next page">
@@ -668,7 +661,7 @@ d_2 = d_1 - \sigma \sqrt{T}\end{split}\]</div>
     <footer class="footer">
   <p>
     
-      著者 上村昌司<br/>
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
     
         &copy; Copyright 2021.<br/>
   </p>
