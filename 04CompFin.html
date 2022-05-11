@@ -1,0 +1,1585 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第4回 関数、行列、最適化 &#8212; コンピュテーショナル・ファイナンス</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="第3回 NumpyとPandas（金融時系列データ）" href="03CompFin.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">コンピュテーショナル・ファイナンス</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="この本を検索..." aria-label="この本を検索..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   コンピュテーショナル・ファイナンス
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01CompFin.html">
+   第1回 Pythonの基礎1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02CompFin.html">
+   第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第4回 関数、行列、最適化
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="ナビゲーションを切り替え" aria-controls="site-navigation"
+                title="ナビゲーションを切り替え" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="このページをダウンロード"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/04CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="ソースファイルをダウンロード" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDFに印刷"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全画面モード"
+        title="全画面モード"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/skamimura0709/CompFin2022/gh-pages?urlpath=tree/_sources/04CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/skamimura0709/CompFin2022/blob/gh-pages/_sources/04CompFin.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="発売 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 目次
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   方程式の解
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   インプライドボラティリティ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   行列計算
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     ベクトルと行列
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     行列の転置
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     行列の和
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     行列の積
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     ベクトルの内積
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     逆行列
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   最適化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markowitz">
+   ポートフォリオの最適化（Markowitzの平均分散アプローチ、制約条件付き最適化）
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第4回 関数、行列、最適化</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 目次 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   方程式の解
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   インプライドボラティリティ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   行列計算
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     ベクトルと行列
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     行列の転置
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     行列の和
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     行列の積
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     ベクトルの内積
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     逆行列
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   最適化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markowitz">
+   ポートフォリオの最適化（Markowitzの平均分散アプローチ、制約条件付き最適化）
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第4回 関数、行列、最適化<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>ライブラリnumpy、scipyを使って、さまざまな数値計算を行う。
+ファイナンスの問題としてはインプライドボラティリティの導出とポートフォリオの最適化を行う。</p>
+<div class="section" id="id2">
+<h2>関数<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>同じ処理を何度も繰り返すときは、処理を関数化すると便利である。
+Pythonでは関数はつぎの書式で定義する。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">関数名</span><span class="p">(</span><span class="n">引数</span><span class="p">):</span>
+  <span class="n">関数の処理</span>
+</pre></div>
+</div>
+<p>関数の処理のブロックは字下げをして記述する。
+返り値をもつ関数の場合は、関数の処理の最後に<code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">返り値</span></code>と記述する。</p>
+<p>つぎの2つの関数は似たような振る舞いをする。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">squared1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">squared2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">squared1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">squared2</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<p>ただし、関数<code class="docutils literal notranslate"><span class="pre">squared1</span></code>は返り値を持たないので、つぎの計算はできない。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">squared1</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">squared1</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for *: &#39;int&#39; and &#39;NoneType&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>返り値を持つ関数<code class="docutils literal notranslate"><span class="pre">squared2</span></code>であれば計算可能。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">squared2</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18
+</pre></div>
+</div>
+</div>
+</div>
+<p>引数は複数あってもよい。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quad1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quad1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>つぎのように書くこともできる。関数の用途によって使い分ける。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">def</span> <span class="nf">quad2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quad2</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>方程式の解<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://scipy.org/">Scipyライブラリ</a>を用いて、方程式</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = 0  \tag{1}
+\]</div>
+<p>の解を求める。解を求めるアルゴリズムに応じた関数を用いることができる。
+詳細は<a class="reference external" href="https://docs.scipy.org/doc/scipy/tutorial/optimize.html#root-finding">https://docs.scipy.org/doc/scipy/tutorial/optimize.html#root-finding</a>
+を参照のこと。</p>
+<p>Scipyは線形代数、微分、積分、最適化などさまざまな数値計算を行うためのライブラリである。ScipyではNumpy配列が基本的なデータ型になる。</p>
+<p>Newton-Raphson法を用いて(1)の解を求めるには、<code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>モジュールの<code class="docutils literal notranslate"><span class="pre">newton</span></code>関数を用いる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">sco</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>2次方程式 <span class="math notranslate nohighlight">\(2x^2  - 5x - 4 = 0\)</span> の解を求めてみる。上で定義した関数<code class="docutils literal notranslate"><span class="pre">quad1</span></code>を使おう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root1</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">quad1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">root1</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.637
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sco.newton</span></code>の2つ目の引数はNewton法により解を探す際の初期点である。
+初期点を <span class="math notranslate nohighlight">\(x＝5\)</span> にしたときの解を求めてみよ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root2</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">quad1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">root2</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.137
+</pre></div>
+</div>
+</div>
+</div>
+<p>解が複数ある場合には初期点により得られる解が変わる（初期点に近い解が見つかる）。グラフにより解と初期点の位置を確認するとよい。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">quad1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7febd34b9790&gt;]
+</pre></div>
+</div>
+<img alt="_images/04CompFin_26_1.png" src="_images/04CompFin_26_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>インプライドボラティリティ<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Black-Scholes公式は、原資産価格<span class="math notranslate nohighlight">\(S_0\)</span>、権利行使価格<span class="math notranslate nohighlight">\(K\)</span>、満期までの時間<span class="math notranslate nohighlight">\(T\)</span>、無リスク金利<span class="math notranslate nohighlight">\(r\)</span>、原資産のボラティリティ<span class="math notranslate nohighlight">\(\sigma\)</span>が与えられたときに、オプション価格<span class="math notranslate nohighlight">\(p\)</span>を与える式である。BS公式は<span class="math notranslate nohighlight">\(T\)</span>時点の原資産価格がつぎの確率変数で与えられることを前提としていた。</p>
+<div class="math notranslate nohighlight">
+\[
+S(T) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} z\right\}
+\]</div>
+<p><span class="math notranslate nohighlight">\(S_0, K, T, r\)</span>とオプション価格<span class="math notranslate nohighlight">\(p\)</span>が与えられたとき、BS公式を満たす<span class="math notranslate nohighlight">\(\sigma\)</span>を<strong>インプライドボラティリティ</strong>と呼ぶ。BS公式は実際にはインプライドボラティリティを求めるための公式として使われる。</p>
+<p><span class="math notranslate nohighlight">\(S_0, K, T, r\)</span>は契約上決まっている値と市場で観察できる値であるため、いずれも推定を必要としない。BS公式を前提とすれば、オプション価格<span class="math notranslate nohighlight">\(p\)</span>を推定することとボラティリティ<span class="math notranslate nohighlight">\(\sigma\)</span>を推定することは同じことになる。</p>
+<p>オプションの市場価格からインプライドボラティリティを求めてみよう。まず、コールオプションに対するBlack-Scholes公式を関数化する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">BScall</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+  <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+  <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+  <span class="n">C</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">C</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(S=100, K=99, T=1, r=0.01, \sigma=0.2\)</span>のとき、コールオプションの価格は約<span class="math notranslate nohighlight">\(8.91\)</span>であった。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">BScall</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.919
+</pre></div>
+</div>
+</div>
+</div>
+<p>インプライドボラティリティを計算するため、つぎの関数を定義する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IV</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+  <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+  <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+  <span class="n">C</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">C</span> <span class="o">-</span> <span class="n">price</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(S=100, K=99, T=1, r=0.01\)</span>かつコールオプションの価格が<span class="math notranslate nohighlight">\(8.919\)</span>のとき、インプライドボラティリティが<span class="math notranslate nohighlight">\(0.2\)</span>になるか確認してみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">IV</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mf">8.919</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.200
+</pre></div>
+</div>
+</div>
+</div>
+<p>確かに逆算されている。</p>
+<p>実際のオプションの市場価格からインプライドボラティリティを計算してみる。つぎのセルに定義されている2次元のタプル<code class="docutils literal notranslate"><span class="pre">calldata</span></code>は原資産を日経225とするコールオプションの市場データである。
+最初の列から順に</p>
+<p>オプション価格<span class="math notranslate nohighlight">\(p\)</span>、原資産価格<span class="math notranslate nohighlight">\(S_0\)</span>, 権利行使価格<span class="math notranslate nohighlight">\(K\)</span>, 満期までの時間<span class="math notranslate nohighlight">\(T\)</span>, 無リスク金利<span class="math notranslate nohighlight">\(r\)</span></p>
+<p>を表す。29銘柄分のデータが含まれる。この29銘柄のインプライドボラティリティを求めてみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calldata</span> <span class="o">=</span> <span class="p">((</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">32250.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">32000.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">9.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">31500.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">31250.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">31000.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">30750.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">31.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">30500.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">39.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">30250.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">51.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">30000.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">51.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29875.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">70.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29750.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">70.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29500.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">84.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29375.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">135.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29250.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">125.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29125.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">160.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">29000.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">145.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28875.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28750.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">215.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28625.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">280.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28500.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">255.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28375.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">305.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28250.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">335.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28125.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">460.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">28000.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">520.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">27750.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">580.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">27500.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">790.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">27250.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">780.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">27125.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">880.0</span><span class="p">,</span> <span class="mf">26848.0</span><span class="p">,</span> <span class="mf">27000.0</span><span class="p">,</span> <span class="mf">0.108</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calldata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.0, 26848.0, 32000.0, 0.108, 0.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">calldata</span><span class="p">)</span>  <span class="c1"># 銘柄数</span>
+<span class="n">res_IV</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="c1"># 推定したインプライドボラティリティを格納する変数</span>
+<span class="n">strike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="c1"># 権利行使価格を格納する変数</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">res_IV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">IV</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">calldata</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+  <span class="n">strike</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">calldata</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>権利行使価格<code class="docutils literal notranslate"><span class="pre">strike</span></code>とインプライドボラティリティ<code class="docutils literal notranslate"><span class="pre">res_IV</span></code>の関係を表すグラフを描く。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">strike</span><span class="p">,</span> <span class="n">res_IV</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;strike price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;impllied vol&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;impllied vol&#39;)
+</pre></div>
+</div>
+<img alt="_images/04CompFin_41_1.png" src="_images/04CompFin_41_1.png" />
+</div>
+</div>
+<p>BS公式が正しければ、権利行使価格<span class="math notranslate nohighlight">\(K\)</span>の値に関わらず、ボラティリティ<span class="math notranslate nohighlight">\(\sigma\)</span>の値は一定になるはずである。しかし、市場で観測されるインプライドボラティリティは上のグラフのような形状になることが多い。このボラティリティスマイルはBlack-Scholesモデルが市場と整合的でないことの証拠の一つである。</p>
+<p>どのようなモデルを仮定すれば、このようなボラティリティスマイルが得られるかという問題がある。</p>
+</div>
+<div class="section" id="id5">
+<h2>行列計算<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Numpyライブラリを用いて、行列の計算を復習する。</p>
+<div class="section" id="id6">
+<h3>ベクトルと行列<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(n\)</span> 個の数を縦に並べたものをベクトルとよぶ:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+a = 
+ \begin{pmatrix}
+  a_1\\
+  a_2\\
+  \vdots\\
+  a_n
+ \end{pmatrix}.
+\end{split}\]</div>
+<p>これを <span class="math notranslate nohighlight">\(n\)</span> 次元ベクトルとよび，<span class="math notranslate nohighlight">\(i\)</span> 番目の数 <span class="math notranslate nohighlight">\(a_i\)</span> をベクトル <span class="math notranslate nohighlight">\(a\)</span> の第
+<span class="math notranslate nohighlight">\(i\)</span> 成分とよぶ．</p>
+<p>いくつかの数字を縦と横に並べて一組としたものを<strong>行列</strong>とよぶ。
+例えば、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{pmatrix}
+  0 &amp; 1\\
+  2 &amp; 3
+ \end{pmatrix}\quad \text{や}\quad
+ \begin{pmatrix}
+  1 &amp; 2 &amp; 3\\ 
+  4 &amp; 5 &amp; 6
+ \end{pmatrix}
+\end{split}\]</div>
+<p>のようなものである。
+いま、<span class="math notranslate nohighlight">\(m \times n\)</span> 個の数字 <span class="math notranslate nohighlight">\(a_{ij}\)</span>
+(<span class="math notranslate nohighlight">\(i = 1, 2, \dots, m\)</span>, <span class="math notranslate nohighlight">\(j = 1, 2, \dots ,n\)</span>) を縦と横に並べて作った行列</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ A = 
+  \begin{pmatrix}
+   a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+   a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+   \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+   a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+  \end{pmatrix}
+\end{split}\]</div>
+<p>を考える。
+行列の横の並びを<strong>行</strong>、縦の並びを<strong>列</strong>とよぶ。
+また、対角線上並んだ成分 (<span class="math notranslate nohighlight">\(a_{11}, a_{22}, \dots\)</span>) を対角成分とよぶ。
+行列<span class="math notranslate nohighlight">\(A\)</span>には
+<span class="math notranslate nohighlight">\(m\)</span>行、<span class="math notranslate nohighlight">\(n\)</span>列あるので、これを <span class="math notranslate nohighlight">\(m \times n\)</span> 行列とよび、<span class="math notranslate nohighlight">\(m \times n\)</span> を
+行列の大きさ(サイズ)とよぶ。
+行列の上から <span class="math notranslate nohighlight">\(i\)</span> 番目、左から <span class="math notranslate nohighlight">\(j\)</span> 番目の数を
+<span class="math notranslate nohighlight">\((i, j)\)</span> 成分という。
+行列<span class="math notranslate nohighlight">\(A\)</span>を <span class="math notranslate nohighlight">\(A = (a_{ij})\)</span> と表記することもある。
+これは <span class="math notranslate nohighlight">\(A\)</span> が <span class="math notranslate nohighlight">\((i, j)\)</span> 成分に <span class="math notranslate nohighlight">\(a_{ij}\)</span> をもつ行列であることを表現している。</p>
+<p>ベクトルも行列の一種である。行が 1 つの行列が行ベクトル、列が 1 つの行列
+が列ベクトルである。</p>
+</div>
+<div class="section" id="id7">
+<h3>行列の転置<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(m \times n\)</span> 行列 <span class="math notranslate nohighlight">\(A = (a_{ij})\)</span> において、行と列を入れ替えること、すなわち <span class="math notranslate nohighlight">\((i, j)\)</span> 成分と <span class="math notranslate nohighlight">\((j, i)\)</span> 成分を入れ替えることを、
+行列を<strong>転置</strong>するといい、転置された行列を<span class="math notranslate nohighlight">\(A^{\top}\)</span> と書く。
+転置された行列を<strong>転置行列</strong>とよぶ。
+転置行列 <span class="math notranslate nohighlight">\(A^{\top}\)</span> は <span class="math notranslate nohighlight">\(n \times m\)</span> 行列になる．
+例えば，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation*}
+A = 
+ \begin{pmatrix}
+  1 &amp; 2 &amp; 3\\
+  4 &amp; 5 &amp; 6
+ \end{pmatrix}
+\end{equation*}
+\end{split}\]</div>
+<p>のとき，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation*}
+A^{\top} = 
+ \begin{pmatrix}
+  1 &amp; 4\\
+  2 &amp; 5\\
+  3 &amp; 6
+ \end{pmatrix}
+\end{equation*} 
+\end{split}\]</div>
+<p>となる．</p>
+<p>Numpyでは転置は<code class="docutils literal notranslate"><span class="pre">.T</span></code>により計算する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 2 3]
+ [4 5 6]]
+[[1 4]
+ [2 5]
+ [3 6]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>行列の和<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(m \times n\)</span> 行列<span class="math notranslate nohighlight">\(A = (a_{ij})\)</span>，<span class="math notranslate nohighlight">\(B = (b_{ij})\)</span> を考える．<span class="math notranslate nohighlight">\(A\)</span>，<span class="math notranslate nohighlight">\(B\)</span> の
+すべての成分に対して，<span class="math notranslate nohighlight">\(a_{ij} = b_{ij}\)</span> が成り立つとき，<span class="math notranslate nohighlight">\(A = B\)</span> であると
+定義する．
+行列の和，差，実数(スカラー)倍をつぎのように定義する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+ A + B &amp;= (a_{ij} + b_{ij})\quad \text{[成分ごとの和]}\\
+ A - B &amp;= (a_{ij} - b_{ij})\quad \text{[成分ごとの差]}\\
+ cA &amp; = (ca_{ij})\ (c \text{は実数})\quad \text{[各成分を実数倍]}．
+\end{align}
+\end{split}\]</div>
+<p>異なる大きさをもつ行列の和と差は定義できないことに注意する．</p>
+<p><strong>例</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ A =
+  \begin{pmatrix}
+   1 &amp; 0 \\
+   2 &amp; 3
+  \end{pmatrix},\quad
+ B =
+ \begin{pmatrix}
+  -1 &amp; 2 \\
+  3 &amp; 5
+ \end{pmatrix}
+\end{split}\]</div>
+<p>のとき</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ A + B =
+  \begin{pmatrix}
+   0 &amp; 2 \\
+   5 &amp; 8
+  \end{pmatrix},\quad
+ A - B =
+ \begin{pmatrix}
+  2 &amp; -2 \\
+  -1 &amp; -2
+ \end{pmatrix},\quad
+ 2A = 
+ \begin{pmatrix}
+  2 &amp; 0\\
+  4 &amp; 6
+ \end{pmatrix}
+\end{split}\]</div>
+<p>となる．</p>
+<p>これらの定義から行列の和と差に関しては実数と同じように、交換法則 (<span class="math notranslate nohighlight">\(A + B
+= B + A\)</span>) と結合法則(<span class="math notranslate nohighlight">\((A + B) + C = A + (B + C)\)</span>) が成り立つことが分かる。
+また、</p>
+<div class="math notranslate nohighlight">
+\[
+ (A + B)^{\top} = A^{\top} + B^{\top},\quad
+  (cA)^{\top} = cA^{\top}\quad (c \text{は実数})
+\]</div>
+<p>が成り立つことも確認できる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 0]
+ [2 3]]
+[[-1  2]
+ [ 3  5]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 2]
+ [5 8]]
+[[ 2 -2]
+ [-1 -2]]
+[[2 0]
+ [4 6]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h3>行列の積<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(m \times n\)</span> 行列 <span class="math notranslate nohighlight">\(A = (a_{ij})\)</span> と <span class="math notranslate nohighlight">\(n \times l\)</span> 行列 <span class="math notranslate nohighlight">\(B = (b_{ij})\)</span>
+の積をつぎのように定義する。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ AB =
+  \begin{pmatrix}
+   \sum_{k=1}^{n}a_{1k}b_{k1} &amp; \sum_{k=1}^{n}a_{1k}b_{k2} &amp; \cdots
+   &amp; \sum_{k=1}^{n}a_{1k}b_{kl}\\
+   \sum_{k=1}^{n}a_{2k}b_{k1} &amp; \sum_{k=1}^{n}a_{2k}b_{k2} &amp; \cdots
+   &amp; \sum_{k=1}^{n}a_{2k}b_{kl}\\
+   \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+   \sum_{k=1}^{n}a_{mk}b_{k1} &amp; \sum_{k=1}^{n}a_{mk}b_{k2} &amp; \cdots
+   &amp; \sum_{k=1}^{n}a_{mk}b_{kl}\\
+  \end{pmatrix}．
+\end{split}\]</div>
+<p>行列 <span class="math notranslate nohighlight">\(A\)</span>，<span class="math notranslate nohighlight">\(B\)</span> の積 <span class="math notranslate nohighlight">\(AB\)</span> は <span class="math notranslate nohighlight">\(m \times l\)</span> 行列になる。
+また、行列の積は <strong><span class="math notranslate nohighlight">\(A\)</span> の列数と <span class="math notranslate nohighlight">\(B\)</span> の行数が同じのときにのみ</strong>定義されることに注意せよ。
+例えば、<span class="math notranslate nohighlight">\(2 \times 3\)</span>行列と<span class="math notranslate nohighlight">\(3 \times 2\)</span>行列の積は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{pmatrix}
+  a_{11} &amp; a_{12} &amp; a_{13}\\
+  a_{21} &amp; a_{22} &amp; a_{23}\\
+ \end{pmatrix}
+ \begin{pmatrix}
+  b_{11} &amp; b_{12}\\
+  b_{21} &amp; b_{22}\\
+  b_{31} &amp; b_{32}
+ \end{pmatrix}
+ =
+ \begin{pmatrix}
+  a_{11}b_{11} + a_{12}b_{21} + a_{13}b_{31} &amp;
+  a_{11}b_{12} + a_{12}b_{22} + a_{13}b_{32}\\
+  a_{21}b_{11} + a_{22}b_{12} + a_{23}b_{31} &amp;
+  a_{21}b_{12} + a_{22}b_{22} + a_{23}b_{32}
+ \end{pmatrix}
+\end{split}\]</div>
+<p>となる。</p>
+<p>行列の積については，定義から結合法則 (<span class="math notranslate nohighlight">\((AB)C = A(BC)\)</span>) と
+分配法則 (<span class="math notranslate nohighlight">\(A(B + C) = AB + AC\)</span>, <span class="math notranslate nohighlight">\((B + C)A = BA + CA\)</span>) は成り立つが、
+<strong>交換法則 (<span class="math notranslate nohighlight">\(AB = BA\)</span>)は成り立たない</strong>。
+<span class="math notranslate nohighlight">\(AB\)</span> が定義できたとしても <span class="math notranslate nohighlight">\(BA\)</span> が定義できないこともある。</p>
+<p>Numpyでは行列の積は<code class="docutils literal notranslate"><span class="pre">np.dot(A,</span> <span class="pre">B)</span></code>によって計算する（<code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">B</span></code>ではないので注意する）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1  2]
+ [ 7 19]]
+[[ 3  6]
+ [13 15]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>ベクトルの内積<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>ベクトルについて</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ a =
+  \begin{pmatrix}
+   a_1\\ a_2\\ \vdots \\ a_n
+  \end{pmatrix},\
+ b =
+  \begin{pmatrix}
+   b_1\\ b_2\\ \vdots \\ b_n
+  \end{pmatrix}
+\end{split}\]</div>
+<p>について <span class="math notranslate nohighlight">\(a^{\top}b\)</span> は行列<span class="math notranslate nohighlight">\(a^{\top}\)</span> と行列 <span class="math notranslate nohighlight">\(b\)</span> の行列の積であるので、定義にしたがって計算すると、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ a^{\top}b = 
+  \begin{pmatrix}
+   a_1 &amp; a_2 &amp; \cdots &amp; a_n
+  \end{pmatrix}
+  \begin{pmatrix}
+   b_1\\
+   b_2\\
+   \vdots\\
+   b_n
+  \end{pmatrix}
+= a_1b_1 + a_2b_2 + \dots + a_nb_n
+\end{split}\]</div>
+<p>となる。これをベクトルの<strong>内積</strong>と呼ぶ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1]
+ [2]
+ [3]]
+[[4]
+ [5]
+ [6]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>1次元のNumpy配列に対してメソッド<code class="docutils literal notranslate"><span class="pre">.reshape(-1,</span> <span class="pre">1)</span></code>とすることで、列数が1のベクトル、すなわち列ベクトルに変換している。1次元のNumpy配列は行と列の概念を持たないので、ベクトルを扱う際には<code class="docutils literal notranslate"><span class="pre">.reshape(-1,</span> <span class="pre">1)</span></code>をしたほうがよい。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[32]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3>逆行列<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(n\)</span> 次<strong>正方行列</strong>（行数と列数が同じ行列） <span class="math notranslate nohighlight">\(A\)</span> に対して、</p>
+<div class="math notranslate nohighlight">
+\[
+  XA = AX = I
+\]</div>
+<p>を満たす正方行列 <span class="math notranslate nohighlight">\(X\)</span> を <span class="math notranslate nohighlight">\(A\)</span> の逆行列といい、<span class="math notranslate nohighlight">\(X\)</span> を <span class="math notranslate nohighlight">\(A^{-1}\)</span> と書く。
+ここで、<span class="math notranslate nohighlight">\(I\)</span> は単位行列。</p>
+<p>連立方程式
+$<span class="math notranslate nohighlight">\(
+Ax = b
+\)</span><span class="math notranslate nohighlight">\(
+について、\)</span>A^{-1}<span class="math notranslate nohighlight">\(が存在すれば、その解は
+\)</span>x = A^{-1}b$
+となる。</p>
+<p>連立方程式</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{cases}
+   x + 2y - 3z = 3\\
+   3x + y + z = 9\\
+  -2x + y - z = 0
+  \end{cases}
+\end{split}\]</div>
+<p>を解く。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = 
+\begin{pmatrix}
+1 &amp; 2 &amp; -3\\
+3 &amp; 1 &amp; 1\\
+-2 &amp; 1 &amp; -1
+\end{pmatrix},\ 
+b = 
+\begin{pmatrix}
+3\\
+9\\
+0
+\end{pmatrix}
+\end{split}\]</div>
+<p>として、
+<span class="math notranslate nohighlight">\(x = A^{-1}b\)</span>
+を計算すればよい。</p>
+<p>Numpyでは逆行列は <code class="docutils literal notranslate"><span class="pre">linalg.inv()</span></code>関数によって計算できる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">invA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">invA</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.]
+ [4.]
+ [2.]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h2>最適化<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>何らかの制約条件のもとで関数を最大化もしくは最小化する方法を考える。
+制約条件の有無、制約条件の形、目的関数の種類に応じて、
+さまざまな最適化手法が存在する。</p>
+<p>まず、非線形な関数<span class="math notranslate nohighlight">\(f(x)\)</span>に関して、制約なしの最小化問題</p>
+<div class="math notranslate nohighlight">
+\[
+\min_x f(x) \tag{2}
+\]</div>
+<p>を考える。<span class="math notranslate nohighlight">\(x\)</span>は1変数でも、多変数でもよい。
+最適化理論では最大化、最小化のどちらを考えてもよい。
+関数 <span class="math notranslate nohighlight">\(f(x)\)</span> を最大にするには，<span class="math notranslate nohighlight">\(-f(x)\)</span> を最小にすればよいので、どちらか一
+方だけ考えておけば理論的には十分である。ここでは最小化問題を考える。</p>
+<p>1変数関数の場合、(2)の解が<span class="math notranslate nohighlight">\(x=a\)</span>のとき、</p>
+<div class="math notranslate nohighlight">
+\[
+f'(a) = 0 
+\]</div>
+<p>を満たす。しかし、<span class="math notranslate nohighlight">\(f'(a) = 0\)</span> だからといって、<span class="math notranslate nohighlight">\(x=a\)</span>で最小値をとるとは限らない。<span class="math notranslate nohighlight">\(f'(a)=0\)</span>となる<span class="math notranslate nohighlight">\(x=a\)</span>の前後で<span class="math notranslate nohighlight">\(f'(x)\)</span>の符号がマイナスからプラスに変わるとき、<span class="math notranslate nohighlight">\(f(x)\)</span>は<span class="math notranslate nohighlight">\(x=a\)</span>で<strong>極小値</strong>をとるという。</p>
+<p><span class="math notranslate nohighlight">\(f(x)\)</span>が<strong>凸関数</strong>のときは、<span class="math notranslate nohighlight">\(x=a\)</span>で極小値を取ることと最小値を取ることは同値となる。すなわち、最小値を求めるためには極小値を探す、大雑把に言えば<span class="math notranslate nohighlight">\(f'(a)=0\)</span>となる <span class="math notranslate nohighlight">\(x=a\)</span> を探せばよい。しかし、<span class="math notranslate nohighlight">\(f(x)\)</span>が非凸関数である場合には、極小値が最小値になるとは限らないので注意する。</p>
+<p>例として、関数 <span class="math notranslate nohighlight">\(f(x) = \sin(x) + \frac{1}{20}x^2\)</span> （非凸関数）の最小化を考えよう。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>グラフを描いてみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7febce6c1250&gt;]
+</pre></div>
+</div>
+<img alt="_images/04CompFin_59_1.png" src="_images/04CompFin_59_1.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(x=-1\)</span>の付近に最小解がありそうである。</p>
+<p>scipy.optimizeモジュールの <code class="docutils literal notranslate"><span class="pre">minimize</span></code>関数により最小化を行う。
+<code class="docutils literal notranslate"><span class="pre">minimize()</span></code>の2つ目の引数で最小解を探す際の初期点を指定する。
+<code class="docutils literal notranslate"><span class="pre">minimize()</span></code>関数の詳細は
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/tutorial/optimize.html">https://docs.scipy.org/doc/scipy/tutorial/optimize.html#</a>
+を参照せよ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_opt</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_opt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: -0.8878628265737075
+ hess_inv: array([[0.9177531]])
+      jac: array([7.4505806e-09])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 21
+      nit: 6
+     njev: 7
+   status: 0
+  success: True
+        x: array([-1.42755179])
+</pre></div>
+</div>
+</div>
+</div>
+<p>よって、<span class="math notranslate nohighlight">\(x=-1.306\)</span> で最小値を取る。最小解は <code class="docutils literal notranslate"><span class="pre">res_opt.x</span></code> によって取り出すことができる。</p>
+<p><strong>演習問題</strong>
+初期点を <span class="math notranslate nohighlight">\(x=4\)</span> としたときの最小解を求めよ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_opt2</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_opt2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 0.00791287635367166
+ hess_inv: array([[0.99929242]])
+      jac: array([-4.92483377e-06])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 12
+      nit: 3
+     njev: 4
+   status: 0
+  success: True
+        x: array([4.27109043])
+</pre></div>
+</div>
+</div>
+</div>
+<p>最小解ではない極小解が求められている。このように、非凸な関数の最適解を求める際には、初期点の選び方が重要な役割を果たす。</p>
+<p>多変数関数 <span class="math notranslate nohighlight">\(f(x)\)</span>　の場合は勾配ベクトルがゼロになる点</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla f(x) = 0
+\]</div>
+<p>を求めればよい。</p>
+<p>2変数関数</p>
+<div class="math notranslate nohighlight">
+\[
+f(x,y)=\sin(x)+\frac{1}{20}x^2 + \sin(y) + \frac{1}{20}y^2
+\]</div>
+<p>の最小化を行う（参考書11.2節）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fo</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">fo</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">surf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">surf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7febce5aa190&gt;
+</pre></div>
+</div>
+<img alt="_images/04CompFin_68_1.png" src="_images/04CompFin_68_1.png" />
+</div>
+</div>
+<p>初期点を<span class="math notranslate nohighlight">\((0,0)\)</span>として解を探してみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">res_opt3</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fo</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_opt3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: -1.7757256531462606
+ hess_inv: array([[ 0.95909952, -0.04090049],
+       [-0.04090049,  0.95909951]])
+      jac: array([1.13248825e-06, 1.13248825e-06])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 24
+      nit: 4
+     njev: 6
+   status: 0
+  success: True
+        x: array([-1.42755075, -1.42755075])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>演習問題</strong>
+初期点を<span class="math notranslate nohighlight">\((5,5)\)</span>とした場合の解を求めてみよ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">res_opt4</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fo</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_opt4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 0.015825752691759787
+ hess_inv: array([[ 0.9962716, -0.0037284],
+       [-0.0037284,  0.9962716]])
+      jac: array([2.94297934e-06, 2.94297934e-06])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 16
+      nit: 3
+     njev: 4
+   status: 0
+  success: True
+        x: array([4.27109826, 4.27109826])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="markowitz">
+<h2>ポートフォリオの最適化（Markowitzの平均分散アプローチ、制約条件付き最適化）<a class="headerlink" href="#markowitz" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(N\)</span>資産に分散投資をするポートフォリオの最適化を考える。
+投資比率を</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\phi=
+\begin{pmatrix}
+  \phi_1\\
+  \phi_2\\
+  \dots\\
+  \phi_N
+\end{pmatrix}
+\end{split}\]</div>
+<p>とおく。<span class="math notranslate nohighlight">\(\phi\)</span>は投資比率なので</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^N\phi_i = \phi^T\mathbf{1} = 1
+\]</div>
+<p>を満たす。ここで <span class="math notranslate nohighlight">\(\mathbf{1}\)</span>はすべての要素が1の<span class="math notranslate nohighlight">\(N\)</span>次元ベクトルである。
+さらに、<span class="math notranslate nohighlight">\(N\)</span>資産の期待収益率を<span class="math notranslate nohighlight">\(r\)</span>（ベクトル）、分散共分散行列を<span class="math notranslate nohighlight">\(\Sigma\)</span>とする。
+すると、ポートフォリオの期待収益率は</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^N\phi_ir_i = \phi^T r
+\]</div>
+<p>分散は</p>
+<div class="math notranslate nohighlight">
+\[
+\phi^T \Sigma \phi
+\]</div>
+<p>と計算できる。</p>
+<p>目標収益率を<span class="math notranslate nohighlight">\(\mu\)</span>とすると、平均分散アプローチでは以下の最適問題を解いて、
+最適ポートフォリオ<span class="math notranslate nohighlight">\(\phi\)</span>を求める。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{cases}
+\min_{\phi} &amp;\phi^T \Sigma \phi \ \text{（3）}\\
+\text{s.t.} &amp;\phi^T r = \mu,\ \phi^T \mathbf{1} =1
+\end{cases}
+\end{split}\]</div>
+<p>この最適化問題をscipy.optimizeモジュールのminimize関数を使って解いてみよう。</p>
+<p>前回の講義で用いた株価データ <code class="docutils literal notranslate"><span class="pre">sample1.csv</span></code> の3銘柄について、期待収益率と分散共分散行列を求めると、つぎのようになる（詳細は付録を参照）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.020</span><span class="p">,</span> <span class="mf">0.0116</span><span class="p">,</span> <span class="mf">0.0109</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.00496</span><span class="p">,</span> <span class="mf">0.00298</span><span class="p">,</span> <span class="mf">0.00138</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.00298</span><span class="p">,</span> <span class="mf">0.00702</span><span class="p">,</span> <span class="mf">0.00112</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">0.00138</span><span class="p">,</span> <span class="mf">0.00112</span><span class="p">,</span> <span class="mf">0.00275</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>例えば、投資比率<span class="math notranslate nohighlight">\(\phi = (0.2, 0.3, 0.5)^T\)</span>というポートフォリオの期待収益率と分散はつぎのように計算できる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1">#投資比率</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">means</span><span class="p">))</span> <span class="c1">#期待収益率</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">weights</span><span class="p">)))</span> <span class="c1">#分散</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.01293]]
+[[0.0024873]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>では、(3)を解いていく。
+まず、制約条件を表す関数を定義する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">const1</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span> <span class="c1"># 目標収益率に関する制約条件</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span> <span class="o">-</span> <span class="n">target_ret</span>
+
+<span class="k">def</span> <span class="nf">const2</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span> <span class="c1"># 投資比率の合計が1である制約条件</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>目的関数を定義する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">port_vol</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="p">,</span> <span class="n">weights</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>最適化の実行。目標収益率を<span class="math notranslate nohighlight">\(0.05\)</span>に設定する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cons</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="n">const1</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="n">const2</span><span class="p">})</span>
+<span class="n">target_ret</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">port_vol</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>結果の表示</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     fun: 0.066097491606704
+     jac: array([ 0.02951634,  0.00080428, -0.00165975])
+ message: &#39;Optimization terminated successfully.&#39;
+    nfev: 30
+     nit: 6
+    njev: 6
+  status: 0
+ success: True
+       x: array([ 4.41308126, -1.51291355, -1.90016771])
+</pre></div>
+</div>
+</div>
+</div>
+<p>最適ポートフォリオは<span class="math notranslate nohighlight">\((4.41, -1.51, -1.90)\)</span>、分散は<span class="math notranslate nohighlight">\(0.066\)</span>となる。</p>
+<p>効率的フロンティアを描く。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1">#目標収益率の列</span>
+<span class="n">min_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">))</span>  <span class="c1">#最小分散を入れる変数</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">target_ret</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">sco</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">port_vol</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="n">constraints</span><span class="o">=</span><span class="n">cons</span><span class="p">)</span>
+  <span class="n">min_var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">fun</span>
+  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">min_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.001      0.00179592 0.00259184 0.00338776 0.00418367 0.00497959
+ 0.00577551 0.00657143 0.00736735 0.00816327 0.00895918 0.0097551
+ 0.01055102 0.01134694 0.01214286 0.01293878 0.01373469 0.01453061
+ 0.01532653 0.01612245 0.01691837 0.01771429 0.0185102  0.01930612
+ 0.02010204 0.02089796 0.02169388 0.0224898  0.02328571 0.02408163
+ 0.02487755 0.02567347 0.02646939 0.02726531 0.02806122 0.02885714
+ 0.02965306 0.03044898 0.0312449  0.03204082 0.03283673 0.03363265
+ 0.03442857 0.03522449 0.03602041 0.03681633 0.03761224 0.03840816
+ 0.03920408 0.04      ]
+[0.00856153 0.00773529 0.0069672  0.00625725 0.00560545 0.0050118
+ 0.0044763  0.00399894 0.00357973 0.00321867 0.00291575 0.00267098
+ 0.00248436 0.00235588 0.00228555 0.00227386 0.00231953 0.00242389
+ 0.00258614 0.00280652 0.00308506 0.00342174 0.00381657 0.00426954
+ 0.00478066 0.00534993 0.00597735 0.00666291 0.00740662 0.00820848
+ 0.00906849 0.00998664 0.01096294 0.01199739 0.01308999 0.01424073
+ 0.01544962 0.01671665 0.01804184 0.01942517 0.02086665 0.02236627
+ 0.02398801 0.02559797 0.02726637 0.02899321 0.03077848 0.0326222
+ 0.03452435 0.03648495]
+</pre></div>
+</div>
+</div>
+</div>
+<p>matplotlibを使ってグラフを描く</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">min_var</span><span class="p">,</span> <span class="n">ret</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;variance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;expected return&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;expected return&#39;)
+</pre></div>
+</div>
+<img alt="_images/04CompFin_91_1.png" src="_images/04CompFin_91_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03CompFin.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第3回 NumpyとPandas（金融時系列データ）</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

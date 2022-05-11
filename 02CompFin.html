@@ -37,9 +37,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -106,6 +109,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="03CompFin.html">
    第3回 NumpyとPandas（金融時系列データ）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04CompFin.html">
+   第4回 関数、行列、最適化
   </a>
  </li>
 </ul>
@@ -894,7 +902,7 @@ S_i(T) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)T + \sigma \sqrt{T} z
 <li><p>正規乱数<span class="math notranslate nohighlight">\(z_i\)</span>を発生させる．</p></li>
 <li><p><span class="math notranslate nohighlight">\(S_i(T) = S_0\exp\left\{\left(r - \frac12\sigma^2\right)T + \sigma
  	       \sqrt{T}z_i\right\}\)</span> を計算。</p></li>
-<li><p><span class="math notranslate nohighlight">\(V_i = (S^i(T) - K)^+\)</span>を計算。<span class="math notranslate nohighlight">\(i &lt; N\)</span>のときは1に戻る。</p></li>
+<li><p><span class="math notranslate nohighlight">\(V_i = (S_i(T) - K)^+\)</span>を計算。<span class="math notranslate nohighlight">\(i &lt; N\)</span>のときは1に戻る。</p></li>
 <li><p>最後に，<span class="math notranslate nohighlight">\(\bar{V} = e^{-rT}(V_1 + V_2 + \dots + V_N)/N\)</span>を計算．</p></li>
 </ol>
 <p>以下のプログラムでは、標準正規分布に従う乱数を <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">random</span></code>として<code class="docutils literal notranslate"><span class="pre">random.gauss(0,</span> <span class="pre">1)</span></code>により生成している。</p>
