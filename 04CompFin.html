@@ -55,6 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="第5回 確率過程と確率微分方程式" href="05CompFin.html" />
     <link rel="prev" title="第3回 NumpyとPandas（金融時系列データ）" href="03CompFin.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -113,6 +114,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    第4回 関数、行列、最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05CompFin.html">
+   第5回 確率過程と確率微分方程式
   </a>
  </li>
 </ul>
@@ -1385,7 +1391,7 @@ f(x,y)=\sin(x)+\frac{1}{20}x^2 + \sin(y) + \frac{1}{20}y^2
 <p>前回の講義で用いた株価データ <code class="docutils literal notranslate"><span class="pre">sample1.csv</span></code> の3銘柄について、期待収益率と分散共分散行列を求めると、つぎのようになる（詳細は付録を参照）。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.020</span><span class="p">,</span> <span class="mf">0.0116</span><span class="p">,</span> <span class="mf">0.0109</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0203</span><span class="p">,</span> <span class="mf">0.0116</span><span class="p">,</span> <span class="mf">0.0109</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.00496</span><span class="p">,</span> <span class="mf">0.00298</span><span class="p">,</span> <span class="mf">0.00138</span><span class="p">],</span>
                <span class="p">[</span><span class="mf">0.00298</span><span class="p">,</span> <span class="mf">0.00702</span><span class="p">,</span> <span class="mf">0.00112</span><span class="p">],</span>
                <span class="p">[</span><span class="mf">0.00138</span><span class="p">,</span> <span class="mf">0.00112</span><span class="p">,</span> <span class="mf">0.00275</span><span class="p">]])</span>
@@ -1560,6 +1566,13 @@ f(x,y)=\sin(x)+\frac{1}{20}x^2 + \sin(y) + \frac{1}{20}y^2
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">第3回 NumpyとPandas（金融時系列データ）</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="05CompFin.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第5回 確率過程と確率微分方程式</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

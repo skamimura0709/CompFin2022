@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第5回 確率過程と確率微分方程式 &#8212; コンピュテーショナル・ファイナンス</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="第4回 関数、行列、最適化" href="04CompFin.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">コンピュテーショナル・ファイナンス</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="この本を検索..." aria-label="この本を検索..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   コンピュテーショナル・ファイナンス
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01CompFin.html">
+   第1回 Pythonの基礎1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02CompFin.html">
+   第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04CompFin.html">
+   第4回 関数、行列、最適化
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第5回 確率過程と確率微分方程式
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="ナビゲーションを切り替え" aria-controls="site-navigation"
+                title="ナビゲーションを切り替え" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="このページをダウンロード"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/05CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="ソースファイルをダウンロード" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDFに印刷"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全画面モード"
+        title="全画面モード"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/skamimura0709/CompFin2022/gh-pages?urlpath=tree/_sources/05CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/skamimura0709/CompFin2022/blob/gh-pages/_sources/05CompFin.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="発売 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 目次
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   確率過程
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   ブラウン運動
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   確率微分方程式
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     確率微分方程式の例
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       ブラウン運動
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mu-sigma">
+       <span class="math notranslate nohighlight">
+        \((\mu, \sigma)\)
+       </span>
+       -ブラウン運動
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       対数正規過程
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       その他
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   確率微分方程式のシミュレート
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   オプション価格理論
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第5回 確率過程と確率微分方程式</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 目次 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   確率過程
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   ブラウン運動
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   確率微分方程式
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     確率微分方程式の例
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id6">
+       ブラウン運動
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mu-sigma">
+       <span class="math notranslate nohighlight">
+        \((\mu, \sigma)\)
+       </span>
+       -ブラウン運動
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id7">
+       対数正規過程
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       その他
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   確率微分方程式のシミュレート
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   オプション価格理論
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第5回 確率過程と確率微分方程式<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ライブラリのインポート</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>確率過程<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>株価や株価収益率のような時間の関数をモデル化するために<strong>確率過程</strong>を用いる。</p>
+<p><span class="math notranslate nohighlight">\((\Omega, P, \mathcal{F})\)</span> を確率空間としたとき、適当な条件を満たす<span class="math notranslate nohighlight">\(\Omega\)</span>上の関数 <span class="math notranslate nohighlight">\(X(\omega)\)</span> (<span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>) を確率変数と呼ぶ。例えば、サイコロを投げるとき出る目や1年後の日経平均株価は確率変数である。</p>
+<p>一方、<span class="math notranslate nohighlight">\(t\)</span>を(時間)パラメータとしたときの、確率変数の族
+<span class="math notranslate nohighlight">\(\{X(t,\omega)\}_{t \in T}\)</span>
+を確率過程と呼ぶ。
+例えば、サイコロを100回続けて投げたときの出る目の列や現在から1年後までの日経平均株価の推移は確率過程である。</p>
+<p><span class="math notranslate nohighlight">\(T\)</span>は実数の区間または整数の集合である。以下では
+<span class="math notranslate nohighlight">\(T\)</span>は実数の区間とする。</p>
+<p>確率過程の見方として，
+時刻<span class="math notranslate nohighlight">\(t\)</span>ごとに確率変数（<span class="math notranslate nohighlight">\(\omega\)</span>の関数) <span class="math notranslate nohighlight">\(X(t,\omega)\)</span> が決まるという見方と、
+<span class="math notranslate nohighlight">\(\omega \in \Omega\)</span> ごとに <span class="math notranslate nohighlight">\(t\)</span> の関数 <span class="math notranslate nohighlight">\(X(t,\omega)\)</span> が決まるという見方がある。
+後者の見方をしたときの<span class="math notranslate nohighlight">\(t\)</span>の関数<span class="math notranslate nohighlight">\(X(t,\omega)\)</span>を<span class="math notranslate nohighlight">\(X\)</span>の
+<strong>見本過程</strong> （見本関数、サンプルパス）とよぶ。</p>
+</div>
+<div class="section" id="id3">
+<h2>ブラウン運動<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>つぎの条件を満たす確率過程<span class="math notranslate nohighlight">\(\{W(t)\}\)</span>を<strong>ブラウン運動</strong>、<strong>標準ブラウン運動</strong>、<strong>標準ウィナー過程</strong>などとよぶ。</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(W(0) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\{W(t)\}\)</span>の見本過程が連続、すなわち<span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>を固定		 したとき、<span class="math notranslate nohighlight">\(W(t,\omega)\)</span>は <span class="math notranslate nohighlight">\(t\)</span> の関数として連続</p></li>
+<li><p><span class="math notranslate nohighlight">\(0&lt;t_1&lt;t_2&lt; \dots &lt; t_n\)</span>に対して、<span class="math notranslate nohighlight">\(n\)</span>個の確率変数
+\begin{equation}
+W(t_1) - W(t_0),\ W(t_2) - W(t_1),\ \dots, \ W(t_n)-W(t_{n-1})
+\end{equation}
+は独立（独立増分性）</p></li>
+<li><p>任意の時刻<span class="math notranslate nohighlight">\(s\leq t\)</span>に対して，確率変数<span class="math notranslate nohighlight">\(W(t) - W(s)\)</span>は平均
+<span class="math notranslate nohighlight">\(0\)</span>、分散<span class="math notranslate nohighlight">\(t - s\)</span>の正規分布にしたがう。</p></li>
+</ol>
+<p>ブラウン運動はノイズのモデル化に用いる。<br />
+ただし、1〜4の性質をみたす確率過程の存在は明らかではない。
+これらの性質を満たす確率過程の存在はWienerによってはじめて証明された。
+また、ブラウン運動の見本過程は、いたるところで微分不可能であることが知られている。</p>
+<p>ブラウン運動の見本過程をシミュレートする。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">W0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 初期値</span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="c1"># ブラウン運動を格納する変数</span>
+<span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">W0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+  <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05CompFin_4_0.png" src="_images/05CompFin_4_0.png" />
+</div>
+</div>
+<p>ブラウン運動をシミュレートする。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># シミュレートする見本過程の数</span>
+<span class="n">W0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 初期値</span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># ブラウン運動を格納する変数</span>
+<span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">W0</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05CompFin_6_0.png" src="_images/05CompFin_6_0.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(X(t) = \mu t + \sigma W(t)\)</span> という形の確率過程を
+<span class="math notranslate nohighlight">\((\mu, \sigma)\)</span>-ブラウン運動とよぶ。
+確率過程 <span class="math notranslate nohighlight">\(X(t)\)</span> が <span class="math notranslate nohighlight">\((\mu,\sigma)\)</span>-ブラウン運動にしたがうとき</p>
+<div class="math notranslate nohighlight">
+\[
+ X(t) \sim \mathrm{BM}(\mu, \sigma^2)
+\]</div>
+<p>と書くことにする。</p>
+<p>また<span class="math notranslate nohighlight">\((\mu, \sigma)\)</span>-ブラウン運動からつくられる確率過程</p>
+<div class="math notranslate nohighlight">
+\[
+S(t) = S \exp\left\{\mu t + \sigma W(t)\right\},\quad S は定数
+\]</div>
+<p>を<strong>幾何ブラウン運動</strong>とよび、株価の価格変動モデルによく用いられる。
+<span class="math notranslate nohighlight">\(S&gt;0\)</span>ならば、幾何ブラウン運動は負の値をとらない。</p>
+<p>幾何ブラウン運動をシミュレートしてみる。（以下のプログラムは無駄が多い）</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># シミュレートする見本過程の数</span>
+<span class="n">W0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># ブラウン運動の初期値</span>
+
+<span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># 幾何ブラウン運動の初期値</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># ブラウン運動を格納する変数</span>
+<span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">W0</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># 幾何ブラウン運動を格納する変数</span>
+<span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">S0</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05CompFin_8_0.png" src="_images/05CompFin_8_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>確率微分方程式<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>つぎのような「微分方程式」を<strong>確率微分方程式</strong>という。</p>
+<div class="math notranslate nohighlight">
+\[
+dX(t) = \mu(X(t))dt + \sigma(X(t))dW(t),\ X(0) = x. 
+\tag{1}
+\]</div>
+<p>じつは (1) は形式的な表現で、確率過程<span class="math notranslate nohighlight">\(\{X(t)\}\)</span>が
+(1) を満たすとは</p>
+<div class="math notranslate nohighlight">
+\[
+X(t) = x + \int_{0}^{t}\mu(X(s))ds + \int_{0}^{t}\sigma(X(s))dW(s)
+\]</div>
+<p>を満たすことを意味する。
+右辺第3項目は<strong>確率積分</strong>とよばれるものである。</p>
+<p>(1) で<span class="math notranslate nohighlight">\(\sigma = 0\)</span>とすると</p>
+<div class="math notranslate nohighlight">
+\[
+dX(t) = \mu( X(t))dt,\ X(0) = x
+\]</div>
+<p>が得られる。
+これは常微分方程式</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt}X(t) = \mu(X(t)),\ X(0)=x  \tag{2}
+\]</div>
+<p>のことである。
+例えば、<span class="math notranslate nohighlight">\(\mu(X(t)) = \mu X(t)\)</span> (<span class="math notranslate nohighlight">\(\mu\)</span>は定数)のとき、
+この常微分方程式の解が</p>
+<div class="math notranslate nohighlight">
+\[
+X(t) = xe^{\mu t}
+\]</div>
+<p>であることはよいだろう。
+確率微分方程式 (1) は常微分方程式 (2) に「ノイズ」
+<span class="math notranslate nohighlight">\(\sigma(X(t))dW(t)\)</span>が加わったものと解釈することができる。</p>
+<p>直感的には確率微分方程式（1)をつぎのように解釈する。
+(1)の左辺<span class="math notranslate nohighlight">\(dX(t)\)</span>は微小時間における<span class="math notranslate nohighlight">\(X(t)\)</span>の変化量とみれ
+ばよく、<span class="math notranslate nohighlight">\(\Delta t\)</span>を微小量としたとき、</p>
+<div class="math notranslate nohighlight">
+\[
+dX(t) \approx X(t + \Delta t) - X(t)
+\]</div>
+<p>と解釈する。
+右辺の<span class="math notranslate nohighlight">\(dW(t)\)</span>も同様に解釈する。</p>
+<p>すると、確率微分方程式(1)は<span class="math notranslate nohighlight">\(X\)</span>の微小時間における変化量が</p>
+<div class="math notranslate nohighlight">
+\[
+X(t+\Delta t) - X(t) = \mu(X(t))\Delta t + \sigma(X(t))(W(t + \Delta t) - W(t)) \tag{3}
+\]</div>
+<p>にしたがうことを記述しているとみることができよう。
+ブラウン運動の定義から<span class="math notranslate nohighlight">\(W(t + \Delta t) - W(t)\)</span>は平均<span class="math notranslate nohighlight">\(0\)</span>, 分散
+<span class="math notranslate nohighlight">\(\Delta t\)</span>の正規分布にしたがうことに注意して、
+式を使うと、<span class="math notranslate nohighlight">\(X(0) = x\)</span>から始めてつぎつぎと</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+  X(\Delta t) &amp;= X(0) + \mu(X(0))\Delta t + \sigma(
+  X(0))\sqrt{\Delta t}Z_1\\
+  X(2\Delta t) &amp;= X(\Delta t) + \mu(X(\Delta t))\Delta t 
+	    + \sigma(X(\Delta t))\sqrt{\Delta t}Z_2\\
+	    &amp;\vdots\\
+	    X(n\Delta t) &amp;= X((n-1)\Delta t) + \mu(X((n-1)\Delta
+	    t))\Delta t 
+	    + \sigma(X((n-1)\Delta t))\sqrt{\Delta t}Z_n
+	   \end{split}  
+\end{split}\]</div>
+<p>のようにして、</p>
+<div class="math notranslate nohighlight">
+\[
+X(\Delta t), X(2\Delta t), \dots, X(n \Delta t), \dots
+\]</div>
+<p>が求まる。
+ここで、<span class="math notranslate nohighlight">\(Z_1,\dots,Z_n\)</span> は互いに独立な標準正規分布にしたがう確率変数である。
+このようにしてできた
+<span class="math notranslate nohighlight">\(\{X(k\Delta t)\}\)</span>（<span class="math notranslate nohighlight">\(k=0,1,\dots\)</span>）は確率微分方程式(1)の解を近似することが知られている。
+よって、<span class="math notranslate nohighlight">\(X(0), X(\Delta t), X(2\Delta t),\dots\)</span>
+をつないでできたグラフを<span class="math notranslate nohighlight">\(\{X(t)\}\)</span>の見本過程の近似だとみなせば、
+(1)を満たす確率過程<span class="math notranslate nohighlight">\(\{X(t)\}\)</span>の振る舞いがイメージできるだろう。</p>
+<div class="section" id="id5">
+<h3>確率微分方程式の例<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h4>ブラウン運動<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p><span class="math notranslate nohighlight">\(\mu(X(t)) = 0,\ \sigma(X(t)) = 1\)</span>の場合、
+すなわち</p>
+<div class="math notranslate nohighlight">
+\[
+dX(t) = dW(t)
+\]</div>
+<p>となり、これはブラウン運動そのものである。</p>
+</div>
+<div class="section" id="mu-sigma">
+<h4><span class="math notranslate nohighlight">\((\mu, \sigma)\)</span>-ブラウン運動<a class="headerlink" href="#mu-sigma" title="Permalink to this headline">¶</a></h4>
+<p><span class="math notranslate nohighlight">\(\mu(X(t)) = \mu (定数),\ \sigma(X(t)) = \sigma(定数)\)</span>
+の場合、すなわち</p>
+<div class="math notranslate nohighlight">
+\[
+dX(t) = \mu dt + \sigma dW(t)
+\]</div>
+<p>となる。これは<span class="math notranslate nohighlight">\((\mu, \sigma)\)</span>-ブラウン運動である。
+<span class="math notranslate nohighlight">\(\sigma = 0\)</span>だと、<span class="math notranslate nohighlight">\(X(t) =\mu t\)</span>であり、それにノイズ<span class="math notranslate nohighlight">\(\sigma dW(t)\)</span>が加わるので、直線<span class="math notranslate nohighlight">\(\mu t\)</span>の周辺をジグザグ
+に動くような見本過程になる。</p>
+</div>
+<div class="section" id="id7">
+<h4>対数正規過程<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p><span class="math notranslate nohighlight">\(\mu(X(t)) = \mu X(t),\ \sigma(X(t)) = \sigma
+X(t)\)</span> (<span class="math notranslate nohighlight">\(\mu,\sigma\)</span>は定数)の場合、</p>
+<div class="math notranslate nohighlight">
+\[
+dX(t) = \mu X(t)dt + \sigma X(t)dW(t) \tag{4}
+\]</div>
+<p>となる。
+これは対数正規過程またはBlack-Scholes（ブラック-ショールズ）モデルとよばれ、 株価変動のモデル化に使われるもっとも基本的な確率過程である。
+(4)を</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dX(t)}{X(t)} = \mu dt + \sigma dW(t)
+\]</div>
+<p>と変形し、さらに</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{X(t+\Delta t) - X(t)}{X(t)} = \mu \Delta t +
+		   \sigma (W(t + \Delta t) - W(t))
+\]</div>
+<p>と離散近似する。
+この左辺は<span class="math notranslate nohighlight">\(\{X(t)\}\)</span>の時刻<span class="math notranslate nohighlight">\(t\)</span>から<span class="math notranslate nohighlight">\(t + \Delta t\)</span>における収益率を表しているから、
+(4)は収益率が正規分布
+<span class="math notranslate nohighlight">\(N(\mu \Delta t, \sigma^2\Delta t)\)</span>
+にしたがうことを意味する。
+じつは、(4)の解は</p>
+<div class="math notranslate nohighlight">
+\[
+X(t) = x\exp\left\{\left(\mu - \frac12 \sigma^2\right)t + \sigma W(t)\right\}
+\]</div>
+<p>であるが、
+これを確認するには<strong>伊藤の公式</strong>を使わなければならない。</p>
+</div>
+<div class="section" id="id8">
+<h4>その他<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>その他、ファイナンスでよく使われる確率微分方程式に</p>
+<div class="math notranslate nohighlight">
+\[
+ dX(t) = \lambda(\bar{X} - X(t))dt + \sigma dW(t)\quad
+  (\text{Ornstein-Uhlenbeck過程})  \tag{5}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ dX(t) = \lambda(\bar{X} - X(t))dt + \sigma \sqrt{X(t)}dW(t)\quad
+(\text{Feller過程，平方根過程}) \tag{6}
+\]</div>
+<p>がある。</p>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>確率微分方程式のシミュレート<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>確率微分方程式の解の見本過程をモンテカルロ法によりシミュレートする。
+Orunstein-Uhlenbeck過程(5)の解<span class="math notranslate nohighlight">\(X(t)\)</span>をシミュレートしてみよう。
+(5)を離散近似すると</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+ 	   X((n+1)\Delta t) &amp;= X(n\Delta t) 
+      + \lambda(\bar{X} - X(n\Delta t)) \Delta t + \sigma
+	    (W((n+1)\Delta t) - W(n\Delta t))\\
+	    &amp;= X(n\Delta t) + \lambda(\bar{X} - X(n\Delta t)) \Delta t + \sigma\sqrt{\Delta t}Z_n,\ n
+ = 0,1,\dots
+\end{split}	  
+\end{split}\]</div>
+<p>となる。
+<span class="math notranslate nohighlight">\([0,1]\)</span>区間を<span class="math notranslate nohighlight">\(M\)</span>分割すると，<span class="math notranslate nohighlight">\(\Delta t = 1/M\)</span>となる．<span class="math notranslate nohighlight">\(X(n\Delta
+	  t) = X_n\)</span>とおけば</p>
+<div class="math notranslate nohighlight">
+\[
+X_{n+1}= X_n + \lambda(\bar{X} - X_n) \Delta t + \sigma\sqrt{\Delta t}Z_n,\  n=0,1,\dots
+\]</div>
+<p>という反復法を考えることになる。
+<span class="math notranslate nohighlight">\(Z_1, Z_2, \dots\)</span>は互いに独立な標準正規分布にしたがう確率変数。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># シミュレートする見本過程の数</span>
+
+<span class="n">X0</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># OU過程の初期値</span>
+<span class="n">lmd</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># OU過程のパラメータ</span>
+<span class="n">barX</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># OU過程の値を格納する変数</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">X0</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+     <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">lmd</span> <span class="o">*</span> <span class="p">(</span><span class="n">barX</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05CompFin_12_0.png" src="_images/05CompFin_12_0.png" />
+</div>
+</div>
+<p><strong>演習問題</strong>
+Feller過程(6)をシミュレートするプログラムを作成せよ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># シミュレートする見本過程の数</span>
+
+<span class="n">X0</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># OU過程の初期値</span>
+<span class="n">lmd</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># OU過程のパラメータ </span>
+<span class="n">barX</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># OU過程の値を格納する変数</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">X0</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">lmd</span> <span class="o">*</span> <span class="p">(</span><span class="n">barX</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05CompFin_14_0.png" src="_images/05CompFin_14_0.png" />
+</div>
+</div>
+<p>対数正規過程(4)は離散近似をしないで、シミュレートすることができる。
+(4)の解が</p>
+<div class="math notranslate nohighlight">
+\[
+X(t) = x\exp\left\{\left(\mu - \frac12 \sigma^2\right)t + \sigma W(t)\right\}
+\]</div>
+<p>であることを用いると、</p>
+<div class="math notranslate nohighlight">
+\[
+X(t + \Delta t) = X(t)\exp\left\{\left(\mu - \frac12 \sigma^2\right) \Delta t + \sigma (W(t + \Delta t) - W(t))\right\}
+\]</div>
+<p>となる。よって、この式を用いて、<span class="math notranslate nohighlight">\(X(0)=x\)</span>からスタートして</p>
+<div class="math notranslate nohighlight">
+\[
+X(\Delta t) = X(0)\exp\left\{\left(\mu - \frac12 \sigma^2\right)\Delta t + \sigma \sqrt{\Delta t}Z_1\right\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+X(2\Delta t) = X(\Delta t)\exp\left\{\left(\mu - \frac12 \sigma^2\right)\Delta t + \sigma \sqrt{\Delta t}Z_2\right\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\vdots
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+X(n\Delta t) = X((n-1)\Delta t)\exp\left\{\left(\mu - \frac12 \sigma^2\right)\Delta t + \sigma \sqrt{\Delta t}Z_n\right\}
+\]</div>
+<p>によりシミュレートすることができる。</p>
+<p><strong>演習問題</strong>
+対数正規過程(4)をシミュレートするプログラムを作成せよ。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># シミュレートする見本過程の数</span>
+
+<span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># BS過程の初期値</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># OU過程の値を格納する変数</span>
+<span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">S0</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+     <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">mu</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/05CompFin_17_0.png" src="_images/05CompFin_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>オプション価格理論<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>現時点を<span class="math notranslate nohighlight">\(0\)</span>，将来のある時点を<span class="math notranslate nohighlight">\(T\)</span>とする。
+ある資産の価格が</p>
+<div class="math notranslate nohighlight">
+\[
+	dS(t) = \mu S(t)dt + \sigma S(t)dW(t),\quad S(0) = S_0 &gt; 0 \tag{7}
+\]</div>
+<p>にしたがうと仮定する。
+満期<span class="math notranslate nohighlight">\(T\)</span>、行使価格<span class="math notranslate nohighlight">\(K\)</span>の<strong>ヨーロピアンコールオプション</strong>とは、
+時点<span class="math notranslate nohighlight">\(T\)</span>にこの資産を価格<span class="math notranslate nohighlight">\(K\)</span>で購入する<strong>権利</strong>のことである。
+満期におけるこのオプションの支払いは</p>
+<div class="math notranslate nohighlight">
+\[
+	(S(T) - K)^+
+\]</div>
+<p>となる。
+ただし、<span class="math notranslate nohighlight">\(x^+ = \max\{0, x\}\)</span>とする。
+行使時点があらかじめ決められているオプションを一般に
+<strong>ヨーロピアンオプション</strong>とよぶ。</p>
+<p>一般には関数<span class="math notranslate nohighlight">\(f \colon \mathbb{R} \to \mathbb{R}\)</span>に対して
+$<span class="math notranslate nohighlight">\(
+	f(S(T))
+\)</span>$
+を支払いとするオプションを考えることができる。</p>
+<p>さらには、<span class="math notranslate nohighlight">\(T\)</span>時点までの情報により確定する支払い
+をもつオプションも考えることができる。例えば、ノックアウトオプション</p>
+<div class="math notranslate nohighlight">
+\[f\left(S(T)\right)I\left\{\max_{0\leq t \leq T}S(t) &lt; B\right\}
+\]</div>
+<p>やアジア型オプション</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(\frac{1}{n}\sum_{i=1}^nS(t_i)\right)
+\]</div>
+<p>がある。</p>
+<p>リスク中立化法（マルチンゲールアプローチ）によれば、
+<span class="math notranslate nohighlight">\(T\)</span>時点までの情報により確定する支払い<span class="math notranslate nohighlight">\(F\)</span>を持つオプションの価格は支払いの現在価値を計算し、そのリスク中立確率のもとで期待値</p>
+<div class="math notranslate nohighlight">
+\[
+E^Q\left[e^{-rT}F\right]
+\]</div>
+<p>がオプションの価格となる。
+ここで、 <span class="math notranslate nohighlight">\(E^Q\)</span>はリスク中立確率のもとでの期待値を表す。
+また、無リスク金利 <span class="math notranslate nohighlight">\(r\)</span> は定数とする。</p>
+<p>例えば、ヨーロピアンコールオプションの価格は</p>
+<div class="math notranslate nohighlight">
+\[
+E^Q\left[e^{-rT}(S(T) - K)^+\right]
+\]</div>
+<p>によって計算することができる。</p>
+<p>リスク中立確率についてはこの講義では説明しないが、
+じつはリスク中立確率のもとで、確率過程(7)は</p>
+<div class="math notranslate nohighlight">
+\[
+dS(t) = rS(t)dt + \sigma S(t)dW^Q(t),\ S(0) = S_0 &gt; 0 \tag{8}
+\]</div>
+<p>にしたがう。(8)の解は</p>
+<div class="math notranslate nohighlight">
+\[
+S(t) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)t + \sigma W^Q(t)\right\}
+\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(\{W^Q(t)\}\)</span>はリスク中立確率<span class="math notranslate nohighlight">\(Q\)</span>のもとでのブラウン運動である。
+(7)と(8)の違いは<span class="math notranslate nohighlight">\(S(t)dt\)</span>の係数(瞬間的な収益率)が<span class="math notranslate nohighlight">\(r\)</span>になってる点と、
+ブラウン運動<span class="math notranslate nohighlight">\(\{W(t)\}\)</span>が別のブラウン
+運動に置き換わっている点である。</p>
+<p>これを認めると<span class="math notranslate nohighlight">\(S(T)\)</span>は対数正規分布にしたがう確率変数には変わりないので、
+期待値 <span class="math notranslate nohighlight">\(E^Q[e^{-rT}(S(T) - K)^+]\)</span> を計算することができる。</p>
+<p>この講義では、議論を(8)式、
+つまり「リスク中立確率のもとで株価過程が〜にしたがう」というところから始めるので、どのようにリスク中立確率が求められるか分からなくても差し支えない。</p>
+<p>また、原資産の価格が対数正規過程(7)以外のより一般的な確率過程に従う場合でも、同様のことが言える。</p>
+<p><strong>演習問題</strong>
+株価過程がリスク中立確率のもとで対数正規過程</p>
+<div class="math notranslate nohighlight">
+\[
+dS(t) = rS(t)dt + \sigma S(t) dW(t) \tag{9}
+\]</div>
+<p>にしたがうとき、</p>
+<p>ノックアウトオプション</p>
+<div class="math notranslate nohighlight">
+\[(S(T) - K)^+ I\left\{\max_{0\leq t \leq T}S(t) &lt; B\right\}
+\]</div>
+<p>の価格をモンテカルロシミュレーションにより求めてみる。</p>
+<p>(9)の解が</p>
+<div class="math notranslate nohighlight">
+\[
+S(t) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)t + \sigma W(t)\right\}
+\]</div>
+<p>であることを使う。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 最終時刻</span>
+<span class="n">M</span> <span class="o">=</span> <span class="mi">250</span> <span class="c1"># [0,T] 区間の分割数</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">M</span> <span class="c1"># 1区間の長さ</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># シミュレートする見本過程の数</span>
+
+<span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># BSモデルのパラメータ</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">120</span> <span class="c1"># バリアの値</span>
+
+<span class="n">payoff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+  <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">S0</span>
+  
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+  
+  <span class="n">payoff</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>  <span class="n">payoff</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">B</span><span class="p">)</span>
+
+<span class="n">price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">payoff</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4216959409795873
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04CompFin.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第4回 関数、行列、最適化</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
