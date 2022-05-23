@@ -384,14 +384,18 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="id3">
 <h2>ブラウン運動<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>つぎの条件を満たす確率過程<span class="math notranslate nohighlight">\(\{W(t)\}\)</span>を<strong>ブラウン運動</strong>、<strong>標準ブラウン運動</strong>、<strong>標準ウィナー過程</strong>などとよぶ。</p>
-<ol class="simple">
+<ol>
 <li><p><span class="math notranslate nohighlight">\(W(0) = 0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\{W(t)\}\)</span>の見本過程が連続、すなわち<span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>を固定		 したとき、<span class="math notranslate nohighlight">\(W(t,\omega)\)</span>は <span class="math notranslate nohighlight">\(t\)</span> の関数として連続</p></li>
-<li><p><span class="math notranslate nohighlight">\(0&lt;t_1&lt;t_2&lt; \dots &lt; t_n\)</span>に対して、<span class="math notranslate nohighlight">\(n\)</span>個の確率変数
-\begin{equation}
-W(t_1) - W(t_0),\ W(t_2) - W(t_1),\ \dots, \ W(t_n)-W(t_{n-1})
-\end{equation}
-は独立（独立増分性）</p></li>
+<li><p><span class="math notranslate nohighlight">\(0&lt;t_1&lt;t_2&lt; \dots &lt; t_n\)</span>に対して、<span class="math notranslate nohighlight">\(n\)</span>個の確率変数</p>
+<div class="math notranslate nohighlight">
+\[
+		  W(t_1) - W(t_0),\ W(t_2) - W(t_1),\ \dots, \ W(t_n)-W(t_{n-1})
+  \]</div>
+</li>
+</ol>
+<p>は独立（独立増分性）</p>
+<ol class="simple">
 <li><p>任意の時刻<span class="math notranslate nohighlight">\(s\leq t\)</span>に対して，確率変数<span class="math notranslate nohighlight">\(W(t) - W(s)\)</span>は平均
 <span class="math notranslate nohighlight">\(0\)</span>、分散<span class="math notranslate nohighlight">\(t - s\)</span>の正規分布にしたがう。</p></li>
 </ol>
@@ -912,7 +916,7 @@ S(t) = S_0 \exp\left\{\left(r - \frac{\sigma^2}{2}\right)t + \sigma W(t)\right\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4904781941404577
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3724563656203732
 </pre></div>
 </div>
 </div>
