@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第8回 モンテカルロ法1 &#8212; コンピュテーショナル・ファイナンス</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="第7回 ツリーモデル2" href="07CompFin.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">コンピュテーショナル・ファイナンス</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="この本を検索..." aria-label="この本を検索..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   コンピュテーショナル・ファイナンス
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01CompFin.html">
+   第1回 Pythonの基礎1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02CompFin.html">
+   第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04CompFin.html">
+   第4回 関数、行列、最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05CompFin.html">
+   第5回 確率過程と確率微分方程式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06CompFin.html">
+   第6回 ツリーモデル1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07CompFin.html">
+   第7回 ツリーモデル2
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第8回 モンテカルロ法1
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="ナビゲーションを切り替え" aria-controls="site-navigation"
+                title="ナビゲーションを切り替え" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="このページをダウンロード"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/08CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="ソースファイルをダウンロード" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDFに印刷"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全画面モード"
+        title="全画面モード"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/skamimura0709/CompFin2022/gh-pages?urlpath=tree/_sources/08CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/skamimura0709/CompFin2022/blob/gh-pages/_sources/08CompFin.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="発売 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 目次
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   モンテカルロ法の基礎
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   分散減少法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     制御変数法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     対称変数法
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第8回 モンテカルロ法1</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 目次 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   モンテカルロ法の基礎
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   分散減少法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     制御変数法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     対称変数法
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第8回 モンテカルロ法1<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>モンテカルロ法の基礎<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>モンテカルロ法の理論的根拠は<strong>大数の法則</strong>である。</p>
+<hr class="docutils" />
+<p><strong>大数の法則</strong></p>
+<p><span class="math notranslate nohighlight">\(X_1, X_2, \dots\)</span>を互いに独立で同一の分布にしたがう確率変数とする。
+<span class="math notranslate nohighlight">\(E[X_1] = \mu (&lt; \infty),\ V[X_1] &lt; \infty\)</span> ならば</p>
+<div class="math notranslate nohighlight">
+\[
+  \frac{1}{n}\sum_{i=1}^{n}X_i \to \mu\ \text{a.s.} \
+	\text{as}\ n	\rightarrow \infty. \quad (概収束)
+\]</div>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>を互いに独立で<span class="math notranslate nohighlight">\(X\)</span>と同一の分布にしたがう <span class="math notranslate nohighlight">\(n\)</span> 個の確率変数とし
+(これを<span class="math notranslate nohighlight">\(X_1,X_2,\dots,X_n\)</span>は<span class="math notranslate nohighlight">\(X\)</span>からの無作為標本であるという)、
+<span class="math notranslate nohighlight">\(E[X] = \mu\)</span>とおく。
+このとき、<span class="math notranslate nohighlight">\(X_1,X_2,\dots,X_n\)</span> の標本平均</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X}_n = \frac{1}{n}\sum_{i=1}^{n}X_i  \tag{1}
+\]</div>
+<p>を<span class="math notranslate nohighlight">\(\mu\)</span>の推定量(確率変数)とする。
+大数の法則より</p>
+<div class="math notranslate nohighlight">
+\[ 
+	\bar{X}_n \rightarrow
+	 \mu\ \text{a.s.}\quad \text{as}\ n \rightarrow \infty
+\]</div>
+<p>となるから、十分大きい<span class="math notranslate nohighlight">\(n\)</span>に対して<span class="math notranslate nohighlight">\(\bar{X}_n\)</span>を計算し、それを<span class="math notranslate nohighlight">\(E[X]\)</span>の近似値とすればよいと考えられる。</p>
+<p>推定量(1)は推定量のよさの基準の1つである不偏性を満たす。
+実際、</p>
+<div class="math notranslate nohighlight">
+\[
+	E[\bar{X}_n] = \frac{1}{n}\sum_{i=1}^{n}E[X_i] = \mu
+\]</div>
+<p>である。</p>
+<p><span class="math notranslate nohighlight">\(\bar{X}_n\)</span>の平均二乗誤差（標準偏差）<span class="math notranslate nohighlight">\(e\)</span>を計算する。</p>
+<div class="math notranslate nohighlight">
+\[
+	e^2 = E[(\bar{X}_n - \mu)^2]
+	 = V\left[\frac{1}{n}\sum_{i=1}^{n}X_i\right]
+	 =  \frac{1}{n^2}\sum_{i=1}^{n}V\left[X_i\right]
+	 = \frac{1}{n^2} \cdot n \sigma_X^2
+	 = \frac{\sigma_X^2}{n}
+\]</div>
+<p>となる。ここで、<span class="math notranslate nohighlight">\(\sigma_X = V[X_1]\)</span>である。</p>
+<p>すなわち，</p>
+<div class="math notranslate nohighlight">
+\[
+	e = \frac{\sigma_X}{\sqrt{n}}
+\]</div>
+<p>が平均二乗誤差となる。
+これより、誤差は<span class="math notranslate nohighlight">\(O({1}/\sqrt{n})\)</span>のオーダーで減少することが分かる。
+実際には<span class="math notranslate nohighlight">\(X\)</span>の標準偏差<span class="math notranslate nohighlight">\(\sigma_X\)</span>は未知なので、標本標準偏差で置き換えて誤差を計算する。</p>
+<p>また、モンテカルロ法による誤差のオーダーは確率変数<span class="math notranslate nohighlight">\(X\)</span>の次元に依存せず、常に<span class="math notranslate nohighlight">\(O({1}/\sqrt{n})\)</span>であることが知られている。誤差が次元に依存しないことが、モンテカルロ法の利点の一つである。</p>
+<p>つぎのプログラムでモンテカルロ法の誤差が<span class="math notranslate nohighlight">\(O({1}/\sqrt{n})\)</span>のオーダーで減少することを見る。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">BScall</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+  <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">S</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+  <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+  <span class="n">C</span> <span class="o">=</span> <span class="n">S</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">C</span>
+
+<span class="k">def</span> <span class="nf">MCBScall</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+  <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  
+  <span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">rnd</span><span class="p">)</span> 
+  <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> 
+  <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#誤差の計算</span>
+<span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+  <span class="n">error</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">MCBScall</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">i</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">-</span> <span class="n">BScall</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+
+<span class="c1">#グラフの描画</span>
+<span class="n">log_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;log10(n)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;log10(error)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">log_error</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08CompFin_4_0.png" src="_images/08CompFin_4_0.png" />
+</div>
+</div>
+<p>標本数を<span class="math notranslate nohighlight">\(n=10^N\)</span>（<span class="math notranslate nohighlight">\(N=2, \dots, 8\)</span>）としたときの、誤差のグラフ。
+横軸が <span class="math notranslate nohighlight">\(\log_{10}n = N\)</span>、縦軸が<span class="math notranslate nohighlight">\(\log_{10}(\text{誤差})\)</span>。オレンジ色の破線は傾きが<span class="math notranslate nohighlight">\(-1/2\)</span>の直線。</p>
+</div>
+<div class="section" id="id3">
+<h2>分散減少法<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>確率変数<span class="math notranslate nohighlight">\(X\)</span>の期待値<span class="math notranslate nohighlight">\(E[X]\)</span>をモンテカルロ法で計算するとき、その誤差は</p>
+<div class="math notranslate nohighlight">
+\[
+	\frac{\sigma_X}{\sqrt{n}}
+\]</div>
+<p>で計算できた。
+<span class="math notranslate nohighlight">\(n\)</span>は標本数、<span class="math notranslate nohighlight">\(\sigma_X\)</span>は<span class="math notranslate nohighlight">\(X\)</span>の標準偏差。
+通常は<span class="math notranslate nohighlight">\(\sigma_X\)</span>は<span class="math notranslate nohighlight">\(X\)</span>の標本標準偏差とする。
+<span class="math notranslate nohighlight">\(\sigma_X\)</span>を小さくする方法を<strong>分散減少法</strong>とよぶ。
+<span class="math notranslate nohighlight">\(\sigma_X\)</span>は所与なので小さくすることはできず、
+実際には<span class="math notranslate nohighlight">\(E[X] = E[Y]\)</span>かつ<span class="math notranslate nohighlight">\(\sigma_X &gt; \sigma_Y\)</span>となる確率変数<span class="math notranslate nohighlight">\(Y\)</span>を作って、<span class="math notranslate nohighlight">\(E[X]\)</span>の代わりに<span class="math notranslate nohighlight">\(E[Y]\)</span>の値を求めようとする。</p>
+<div class="section" id="id4">
+<h3>制御変数法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>確率変数<span class="math notranslate nohighlight">\(X\)</span>の期待値<span class="math notranslate nohighlight">\(E[X]\)</span>をモンテカルロ法により求めることを考える。
+いま、別の確率変数<span class="math notranslate nohighlight">\(Y\)</span>の期待値<span class="math notranslate nohighlight">\(E[Y]\)</span>が計算できているとする
+(解析解による正確な値のほうがよいが、近似値でも構わない）。
+このとき<span class="math notranslate nohighlight">\((X_i, Y_i)\)</span>(<span class="math notranslate nohighlight">\(i=1,2,\dots,n\)</span>)を<span class="math notranslate nohighlight">\((X,Y)\)</span>の無作為標本したときに、
+適当な定数<span class="math notranslate nohighlight">\(b\)</span>に対して</p>
+<div class="math notranslate nohighlight">
+\[
+	X_i(b) = X_i - b(Y_i - E[Y])
+\]</div>
+<p>という変数を作る。
+<span class="math notranslate nohighlight">\(X_i(b)\)</span> (<span class="math notranslate nohighlight">\(i=1,2,\dots,n\)</span>)の標本平均は</p>
+<div class="math notranslate nohighlight">
+\[
+	\bar{X}(b) = \frac{1}{n}\sum_{i=1}^{n}X_i(b)
+	 = \frac{1}{n}\sum_{i=1}^{n}(X_i - b(Y_i - E[Y]))
+	 = \bar{X} - b(\bar{Y} - E[Y])
+\]</div>
+<p>となる。</p>
+<p><span class="math notranslate nohighlight">\(\bar{X}(b)\)</span>は<span class="math notranslate nohighlight">\(E[X]\)</span>の不偏推定量である。
+実際、</p>
+<div class="math notranslate nohighlight">
+\[
+	E[\bar{X}(b)] = E[\bar{X} - b(\bar{Y} - E[Y])] = E[\bar{X}]
+	 = E[X]\ （\bar{X}はXの不偏推定量）
+\]</div>
+<p>である。</p>
+<p>ここで、<span class="math notranslate nohighlight">\(b\)</span>を上手く決めることによって<span class="math notranslate nohighlight">\({X}(b)\)</span>の分散が<span class="math notranslate nohighlight">\({X}\)</span>よりも小さくなるようにしたい。
+まず、<span class="math notranslate nohighlight">\({X_i}(b)\)</span>の標準偏差<span class="math notranslate nohighlight">\(\sigma_X(b)\)</span>を計算すると</p>
+<p>\begin{align}
+\sigma_X^2(b)=V[{X_i(b)}] = V[X_i - b(Y_i - E[Y])]
+&amp;= V[X_i] + V[b(Y_i - E[Y])] -2b\mathrm{Cov}(X_i, Y_i - E[Y]) \
+&amp;= \sigma_X^2 + b^2 \sigma_Y^2 - 2b \sigma_X \sigma_Y \rho_{XY} \tag{2}
+\end{align}</p>
+<p>となる。
+ここで、<span class="math notranslate nohighlight">\(\sigma^2_X = V[X], \sigma^2_Y = V[Y]\)</span>, <span class="math notranslate nohighlight">\(\rho_{XY}\)</span>は
+<span class="math notranslate nohighlight">\(X,Y\)</span>の相関係数である。
+よって、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+b^2 \sigma_Y^2 -  2b\sigma_X\sigma_Y\rho_{XY} \leq 0 \
+       \Leftrightarrow\
+       \begin{cases}
+       	0 &lt; b &lt; \frac{2\sigma_X}{\sigma_Y}\rho_{XY},\ &amp; \rho_{XY} &gt; 0\\
+	\frac{2\sigma_X}{\sigma_Y}\rho_{XY} &lt; b &lt; 0,\ &amp; \rho_{XY} &lt;0
+       \end{cases}
+\end{split}\]</div>
+<p>であれば<span class="math notranslate nohighlight">\(\sigma_X(b) &lt; \sigma_X\)</span>
+となる。
+このときは、<span class="math notranslate nohighlight">\(\bar{X}\)</span>の代わりに<span class="math notranslate nohighlight">\(\bar{X}(b)\)</span>を計
+算した方が誤差が小さい。</p>
+<p>また、</p>
+<div class="math notranslate nohighlight">
+\[
+b^* = \frac{\sigma_X}{\sigma_Y}\rho_{XY} = \frac{\mathrm{Cov(X,Y)}}{V[Y]}
+\]</div>
+<p>としたときに<span class="math notranslate nohighlight">\(\sigma_X(b)\)</span>は最も小さくなる。
+<span class="math notranslate nohighlight">\(V[X(b^*)]\)</span>と<span class="math notranslate nohighlight">\(V[X]\)</span>を比べてみると</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{V[{X}(b^*)]}{V[{X}]} =
+\frac{\sigma_X^2(1-\rho_{XY}^2)}{\sigma_X^2}
+	 = 1- \rho_{XY}^2.
+\]</div>
+<p>よって、<span class="math notranslate nohighlight">\(X\)</span>と<span class="math notranslate nohighlight">\(Y\)</span>の相関が<span class="math notranslate nohighlight">\(1\)</span>または<span class="math notranslate nohighlight">\(-1\)</span>に近いほど分散の減少効果が得られることになる。</p>
+<p>この<span class="math notranslate nohighlight">\(Y\)</span>を<strong>制御変数</strong>とよぶ。
+制御変数<span class="math notranslate nohighlight">\(Y\)</span>には<span class="math notranslate nohighlight">\(X\)</span>と同じような動きをするものを選ぶ。
+<span class="math notranslate nohighlight">\(b^*\)</span>は通常は未知なので、標本から得られる値で置き換える。
+すなわち、</p>
+<div class="math notranslate nohighlight">
+\[ \tag{3}
+	b_n = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i -
+	 \bar{Y})}{\sum_{i=1}^{n}(Y_i - \bar{Y})^2}
+\]</div>
+<p>で置き換える。
+じつは(3)は標本<span class="math notranslate nohighlight">\((X_1, \dots, X_n)\)</span>を<span class="math notranslate nohighlight">\((Y_1, \dots, Y_n)\)</span>に回帰したときの回帰係数に他ならない。</p>
+<p>制御変数法の効果を見るため、
+Black-Scholesモデルにおいてヨーロピアンコールオプションの価格を求めてみる。
+求めたい値は<span class="math notranslate nohighlight">\(E[e^{-rT}(S(T) - K)^+]\)</span>で、
+制御変数を原資産価格<span class="math notranslate nohighlight">\(S(T)\)</span>とする。
+対数正規分布の計算から</p>
+<div class="math notranslate nohighlight">
+\[
+	E[S(T)] = e^{rT}S(0)
+\]</div>
+<p>であることを使う。</p>
+<hr class="docutils" />
+<p>（参考）
+<span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span>のとき、<span class="math notranslate nohighlight">\(Y=e^X\)</span>（対数正規分布に従う）の期待値と分散は</p>
+<div class="math notranslate nohighlight">
+\[
+E[Y] = e^{\mu + \sigma^2/2},\ V[Y] = (e^{\sigma^2} - 1)e^{2\mu+\sigma^2}
+\]</div>
+<p>となる。</p>
+<hr class="docutils" />
+<p>よって、</p>
+<div class="math notranslate nohighlight">
+\[
+	\frac{1}{n}\sum_{i=1}^{n}\left[e^{-rT}(S^i(T) - K)^+ - b^*(S^i(T) - e^{rT}S(0))\right]
+\]</div>
+<p>として、<span class="math notranslate nohighlight">\(E[e^{-rT}(S(T) - K)^+]\)</span>を計算する。
+ここで、<span class="math notranslate nohighlight">\(S^i(T)\)</span> (<span class="math notranslate nohighlight">\(i=1,2,\dots,n\)</span>)は<span class="math notranslate nohighlight">\(S(T)\)</span>と同じ分布をもつ無作為標本である。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CVBScall</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+  <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c1">#正規乱数</span>
+  <span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">rnd</span><span class="p">)</span> <span class="c1">#株価の値、制御変数</span>
+  <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#支払いの現在価値の標本</span>
+  <span class="n">covXS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">covXS</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+  <span class="n">Xb</span> <span class="o">=</span> <span class="n">X</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">S0</span><span class="p">)</span>  <span class="c1">#Xから制御変数を引いたもの</span>
+  <span class="k">return</span> <span class="n">Xb</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CVBScall</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.914374608253311
+</pre></div>
+</div>
+</div>
+</div>
+<p>収束の様子を観察してみる。標本数を <span class="math notranslate nohighlight">\(10000 \times i\)</span>（<span class="math notranslate nohighlight">\(i=1, 2, \dots, N\)</span>)として、価格のグラフを描く。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 制御変数変数法を使ったオプション価格</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">price</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">CVBScall</span><span class="p">(</span><span class="mi">10000</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># グラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">8.9</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08CompFin_11_0.png" src="_images/08CompFin_11_0.png" />
+</div>
+</div>
+<p>制御変数法を使わない場合と比較してみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 制御変数変数法を使ったオプション価格</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">price2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">price2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">MCBScall</span><span class="p">(</span><span class="mi">10000</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># グラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">8.9</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">price2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08CompFin_13_0.png" src="_images/08CompFin_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>対称変数法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>確率変数</p>
+<div class="math notranslate nohighlight">
+\[
+S(T) = S(0)\exp\left\{\left(r-\frac{\sigma^2}{2}\right)T + \sigma W(T)\right\}
+\]</div>
+<p>と同じ分布をもつ<span class="math notranslate nohighlight">\(n\)</span>個の無作為標本を得るには正規乱数</p>
+<div class="math notranslate nohighlight">
+\[
+Z_1, Z_2, \dots, Z_n  \tag{4}
+\]</div>
+<p>を発生させ、</p>
+<div class="math notranslate nohighlight">
+\[
+S^i = S(0)\exp\left\{\left(r-\frac{\sigma^2}2\right)T + \sigma \sqrt{T}Z_i\right\}
+\]</div>
+<p>とすればよかった。</p>
+<p>このとき、同時に</p>
+<div class="math notranslate nohighlight">
+\[
+	-Z_1, -Z_2, \dots, -Z_n  \tag{5}
+\]</div>
+<p>を乱数として</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde{S}_i = S(0)\exp\left\{\left(r-\frac{\sigma^2}2\right)T + \sigma \sqrt{T}(-Z_i)\right\}
+\]</div>
+<p>という標本も作る。</p>
+<p>(4)と(5)の乱数は<span class="math notranslate nohighlight">\(-1\)</span>の相関を持っているので、
+<span class="math notranslate nohighlight">\(S_i\)</span>と<span class="math notranslate nohighlight">\({\tilde{S}_i}\)</span>はかなり強い負の相関を持つことが予測できる。
+そこで<span class="math notranslate nohighlight">\(E[X]\)</span> (<span class="math notranslate nohighlight">\(X=h(S(T))\)</span>)を計算する際に</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X}_A = \frac{1}{2n}\left(\sum_{i=1}^nX_i + \sum_{i=1}^n\tilde{X}_i\right)
+\]</div>
+<p>を<span class="math notranslate nohighlight">\(E[X]\)</span>の推定量とする。
+ここで、<span class="math notranslate nohighlight">\(X_i = h(S_i),\ \tilde{X}_i = h(\tilde{S}_i)\)</span>である。
+これは明らかに不偏推定量である。
+この手法を<strong>対称変数法</strong>とよぶ。</p>
+<p>いま標本<span class="math notranslate nohighlight">\(X_i\)</span>を生成するタイミングで<span class="math notranslate nohighlight">\(\tilde{X}_i\)</span>も生成すると仮定すると、
+対称変数法が意味を持つのは</p>
+<div class="math notranslate nohighlight">
+\[
+	V[\bar{X}_A] &lt; V\left[\frac{1}{2n}\sum_{i=1}^{2n}X_i\right]
+\]</div>
+<p>のとき、すなわち</p>
+<div class="math notranslate nohighlight">
+\[
+	V[X_i + \tilde{X}_i] &lt; 2V[X_i]
+\]</div>
+<p>のときだと言える。
+この式の左辺は</p>
+<div class="math notranslate nohighlight">
+\[
+	V[X_i + \tilde{X}_i]
+	 = V[X_i] + V[\tilde{X}_i] + 2 \mathrm{Cov}(X_i,
+	 \tilde{X}_i)
+	 = 2V[X_i]+ 2 \mathrm{Cov}(X_i, \tilde{X}_i)
+\]</div>
+<p>であるから、</p>
+<div class="math notranslate nohighlight">
+\[
+	\mathrm{Cov}(X_i,\tilde{X}_i) &lt; 0
+\]</div>
+<p>のとき、すなわち<span class="math notranslate nohighlight">\(X_i\)</span>と<span class="math notranslate nohighlight">\(\tilde{X}_i\)</span>の相関が負のとき、対象変数法に分散減少効果があることが分かる。</p>
+<p>Black-Scholesモデルにおいてヨーロピアンコールオプションの価格を対称変数法を用いて求める。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">AntBScall</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+
+  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+  <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+  <span class="c1">#満期における株価を生成</span>
+  <span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span> <span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">rnd</span><span class="p">)</span>
+  <span class="c1">#対称変数法により満期における株価を生成</span>
+  <span class="n">Sm</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">T</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">rnd</span><span class="p">))</span>
+
+  <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1">#Sに対する支払い</span>
+  <span class="n">Xm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">Sm</span> <span class="o">-</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">#Smに対する支払い</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">Xm</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AntBScall</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.921681947013795
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 制御変数変数法を使ったオプション価格</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">price3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+  <span class="n">price3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">AntBScall</span><span class="p">(</span><span class="mi">10000</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># グラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">8.9</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">price3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08CompFin_17_0.png" src="_images/08CompFin_17_0.png" />
+</div>
+</div>
+<p><strong>演習問題</strong>
+<span class="math notranslate nohighlight">\(T\)</span>時点における株価<span class="math notranslate nohighlight">\(S(T)\)</span>がBlack-Scholesモデルにしたがうとする。このとき</p>
+<div class="math notranslate nohighlight">
+\[
+I\{S(T) &gt; K\}
+\]</div>
+<p>という支払いを持つオプションの価格</p>
+<div class="math notranslate nohighlight">
+\[
+E[e^{-rT}I\{S(T) &gt; K\}]
+\]</div>
+<p>をモンテカルロ法により計算せよ。何らかの分散減少法を適用すること。</p>
+<p>ここで <span class="math notranslate nohighlight">\(I\{\}\)</span>は<span class="math notranslate nohighlight">\(\{ \}\)</span>内の条件が満たされたとき<span class="math notranslate nohighlight">\(1\)</span>、そうでないとき<span class="math notranslate nohighlight">\(0\)</span>の値を取る関数である。すなわち、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Tにおける支払い = 
+\begin{cases}
+1,\ \text{if}\ S(T) &gt; K\\
+0,\ \text{if}\ S(T) \leq K
+\end{cases}
+\end{split}\]</div>
+<p>である。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">AntDigitcall</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">S0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+
+  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+  <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+  <span class="c1">#満期における株価を生成</span>
+  <span class="n">S</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span> <span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">T</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">rnd</span><span class="p">)</span>
+  <span class="c1">#対称変数法により満期における株価を生成</span>
+  <span class="n">Sm</span> <span class="o">=</span> <span class="n">S0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">T</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">rnd</span><span class="p">))</span>
+
+  <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">S</span> <span class="o">&gt;</span> <span class="n">K</span><span class="p">)</span>   <span class="c1">#Sに対する支払い</span>
+  <span class="n">Xm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Sm</span> <span class="o">&gt;</span> <span class="n">K</span><span class="p">)</span>  <span class="c1">#Smに対する支払い</span>
+
+  <span class="k">return</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">Xm</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AntDigitcall</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4951437228546339
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="07CompFin.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第7回 ツリーモデル2</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
