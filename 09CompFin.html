@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>モンテカルロ法2 &#8212; コンピュテーショナル・ファイナンス</title>
+    <title>第9回 モンテカルロ法2 &#8212; コンピュテーショナル・ファイナンス</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -137,7 +137,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   モンテカルロ法2
+   第9回 モンテカルロ法2
   </a>
  </li>
 </ul>
@@ -233,46 +233,25 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   モンテカルロ法2
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   乱数
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     乱数
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     準モンテカルロ法
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     準モンテカルロ法によるオプション価格近似
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#begin-equation-begin-pmatrix-w-t-1-w-t-2-vdots-w-t-m-1-w-t-m-end-pmatrix">
-   \begin{equation}
-\begin{pmatrix}
-W(t_1)\
-W(t_2)\
-\vdots\
-W(t_{M-1})\
-W(t_M)
-\end{pmatrix}
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   準モンテカルロ法
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     確率ボラティリティモデルにおけるオプション価格付け
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   準モンテカルロ法によるオプション価格近似
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   確率ボラティリティモデルにおけるオプション価格付け
+  </a>
  </li>
 </ul>
 
@@ -284,7 +263,7 @@ W(t_M)
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>モンテカルロ法2</h1>
+                <h1>第9回 モンテカルロ法2</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -294,46 +273,25 @@ W(t_M)
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   モンテカルロ法2
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   乱数
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     乱数
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     準モンテカルロ法
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     準モンテカルロ法によるオプション価格近似
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#begin-equation-begin-pmatrix-w-t-1-w-t-2-vdots-w-t-m-1-w-t-m-end-pmatrix">
-   \begin{equation}
-\begin{pmatrix}
-W(t_1)\
-W(t_2)\
-\vdots\
-W(t_{M-1})\
-W(t_M)
-\end{pmatrix}
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   準モンテカルロ法
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     確率ボラティリティモデルにおけるオプション価格付け
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   準モンテカルロ法によるオプション価格近似
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   確率ボラティリティモデルにおけるオプション価格付け
+  </a>
  </li>
 </ul>
 
@@ -345,7 +303,7 @@ W(t_M)
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>モンテカルロ法2<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>第9回 モンテカルロ法2<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -510,7 +468,7 @@ Scipyライブラリのstats.qmc.MultivariateNormalQMCモジュール
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.918626456690246
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.918610242015262
 </pre></div>
 </div>
 </div>
@@ -666,34 +624,33 @@ W(t_M) &amp;= W(t_{M-1}) + \sqrt{t_{M} - t_{M-1}}Z_M =
 \sum_{i=1}^{M}\sqrt{t_i-t_{i-1}}Z_i
 \end{align*}</p>
 <p>となる。よって，</p>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="begin-equation-begin-pmatrix-w-t-1-w-t-2-vdots-w-t-m-1-w-t-m-end-pmatrix">
-<h1>\begin{equation}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+	\begin{pmatrix}
+	 W(t_1)\\
+	 W(t_2)\\
+	 \vdots\\
+	 W(t_{M-1})\\
+	 W(t_M)
+	\end{pmatrix}
+ =
+ \begin{pmatrix}
+  \sqrt{t_1}&amp; 0 &amp; \cdots &amp; 0 &amp; 0\\
+  \sqrt{t_1}&amp; \sqrt{t_2 - t_1} &amp; \cdots &amp; 0 &amp; 0\\
+  \vdots&amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+  \sqrt{t_1} &amp; \sqrt{t_2 - t_1} &amp; \cdots &amp; \sqrt{t_{M-1} - t_{M-2}} &amp;
+  0\\
+  \sqrt{t_1} &amp; \sqrt{t_2 - t_1} &amp; \cdots &amp; \sqrt{t_{M-1} - t_{M-2}} &amp;
+  \sqrt{t_{M} - t_{M-1}}
+ \end{pmatrix}
 \begin{pmatrix}
-W(t_1)\
-W(t_2)\
-\vdots\
-W(t_{M-1})\
-W(t_M)
-\end{pmatrix}<a class="headerlink" href="#begin-equation-begin-pmatrix-w-t-1-w-t-2-vdots-w-t-m-1-w-t-m-end-pmatrix" title="Permalink to this headline">¶</a></h1>
-<p>\begin{pmatrix}
-\sqrt{t_1}&amp; 0 &amp; \cdots &amp; 0 &amp; 0\
-\sqrt{t_1}&amp; \sqrt{t_2 - t_1} &amp; \cdots &amp; 0 &amp; 0\
-\vdots&amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \
-\sqrt{t_1} &amp; \sqrt{t_2 - t_1} &amp; \cdots &amp; \sqrt{t_{M-1} - t_{M-2}} &amp;
-0\
-\sqrt{t_1} &amp; \sqrt{t_2 - t_1} &amp; \cdots &amp; \sqrt{t_{M-1} - t_{M-2}} &amp;
-\sqrt{t_{M} - t_{M-1}}
-\end{pmatrix}
-\begin{pmatrix}
-Z_1\
-Z_2\
-\vdots\
-Z_{M-1}\
-Z_M
-\end{pmatrix}
-\end{equation}</p>
+	 Z_1\\
+	 Z_2\\
+	 \vdots\\
+	 Z_{M-1}\\
+	 Z_M
+	\end{pmatrix}
+\end{split}\]</div>
 <p>とすればよい。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -733,20 +690,22 @@ Z_M
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4643396957173087
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.434059797040958
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>確率ボラティリティモデルにおけるオプション価格付け<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>Black-Scholeモデルは市場データと整合的でないことはよく知られている。例えば、BSモデルはボラティリティ・スマイルを説明できない。そこで、BSモデルの拡張として、ボラティリティが確率的に変動するモデルが考案されている。なかでも、つぎのHestonモデルは解析解（かなり複雑だが）があることもあり、よく用いられる。</p>
-<p>\begin{equation} \tag{1}
+<div class="math notranslate nohighlight">
+\[\begin{split} \tag{1}
 \begin{cases}
-dS(t)  = r S(t) dt +  S(t) \sqrt{Y(t)}dW_1(t)\
-dY(t)  = k(\theta - Y(t)) dt + \beta \sqrt{Y(t)} dW_2(t)
+ dS(t)  = r S(t) dt +  S(t) \sqrt{Y(t)}dW_1(t)\\
+ dY(t)  = k(\theta - Y(t)) dt + \beta \sqrt{Y(t)} dW_2(t)
 \end{cases}
-\end{equation}</p>
+\end{split}\]</div>
 <p>ここで、<span class="math notranslate nohighlight">\(W_1, W_2\)</span>は相関を持つブラウン運動で</p>
 <div class="math notranslate nohighlight">
 \[
