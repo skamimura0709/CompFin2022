@@ -468,7 +468,7 @@ Scipyライブラリのstats.qmc.MultivariateNormalQMCモジュール
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.918610242015262
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.918598838755454
 </pre></div>
 </div>
 </div>
@@ -690,7 +690,7 @@ W(t_M) &amp;= W(t_{M-1}) + \sqrt{t_{M} - t_{M-1}}Z_M =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.434059797040958
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4753391091491637
 </pre></div>
 </div>
 </div>
@@ -700,9 +700,9 @@ W(t_M) &amp;= W(t_{M-1}) + \sqrt{t_{M} - t_{M-1}}Z_M =
 <h2>確率ボラティリティモデルにおけるオプション価格付け<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>Black-Scholeモデルは市場データと整合的でないことはよく知られている。例えば、BSモデルはボラティリティ・スマイルを説明できない。そこで、BSモデルの拡張として、ボラティリティが確率的に変動するモデルが考案されている。なかでも、つぎのHestonモデルは解析解（かなり複雑だが）があることもあり、よく用いられる。</p>
 <div class="math notranslate nohighlight">
-\[\begin{split} \tag{1}
+\[\begin{split} 
 \begin{cases}
- dS(t)  = r S(t) dt +  S(t) \sqrt{Y(t)}dW_1(t)\\
+ dS(t)  = r S(t) dt +  S(t) \sqrt{Y(t)}dW_1(t) \quad \quad \text{(1)}\\
  dY(t)  = k(\theta - Y(t)) dt + \beta \sqrt{Y(t)} dW_2(t)
 \end{cases}
 \end{split}\]</div>
