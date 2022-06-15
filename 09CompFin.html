@@ -468,7 +468,7 @@ Scipyライブラリのstats.qmc.MultivariateNormalQMCモジュール
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.918598838755454
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.918446781345814
 </pre></div>
 </div>
 </div>
@@ -613,16 +613,17 @@ S(t) = S(0)\exp\left\{\left(r - \frac{\sigma^2}{2}\right)t + \sigma W(t)\right\}
 <span class="math notranslate nohighlight">\(W(t_{i+1}) - W(t_i)\)</span>は独立だから、
 <span class="math notranslate nohighlight">\((Z_1, Z_2, \dots,Z_M)\)</span>
 を各成分が独立な<span class="math notranslate nohighlight">\(M\)</span>次元標準正規分布にしたがう確率変数としたとき</p>
-<p>\begin{align*}
-W(t_1) &amp;= W(t_0) + \sqrt{t_1}Z_1 = \sqrt{t_1}Z_1\
-W(t_2) &amp;= W(t_1) + \sqrt{t_2 - t_1}Z_2 = \sqrt{t_1}Z_1 +
-\sqrt{t_2 - t_1}Z_2\
-\vdots\
-W(t_{M-1}) &amp;= W(t_{M-2}) + \sqrt{t_{M-1} - t_{M-2}}Z_{d-1} =
-\sum_{i=1}^{M-1}\sqrt{t_i-t_{i-1}}Z_i\
-W(t_M) &amp;= W(t_{M-1}) + \sqrt{t_{M} - t_{M-1}}Z_M =
-\sum_{i=1}^{M}\sqrt{t_i-t_{i-1}}Z_i
-\end{align*}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+	W(t_1) = W(t_0) + \sqrt{t_1}Z_1 = \sqrt{t_1}Z_1\\
+	W(t_2) = W(t_1) + \sqrt{t_2 - t_1}Z_2 = \sqrt{t_1}Z_1 +
+	\sqrt{t_2 - t_1}Z_2\\
+	\vdots\\
+	W(t_{M-1}) = W(t_{M-2}) + \sqrt{t_{M-1} - t_{M-2}}Z_{d-1} =
+	\sum_{i=1}^{M-1}\sqrt{t_i-t_{i-1}}Z_i\\
+	W(t_M) = W(t_{M-1}) + \sqrt{t_{M} - t_{M-1}}Z_M =
+	\sum_{i=1}^{M}\sqrt{t_i-t_{i-1}}Z_i
+\end{split}\]</div>
 <p>となる。よって，</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -690,7 +691,7 @@ W(t_M) &amp;= W(t_{M-1}) + \sqrt{t_{M} - t_{M-1}}Z_M =
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4753391091491637
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.455541554238158
 </pre></div>
 </div>
 </div>
