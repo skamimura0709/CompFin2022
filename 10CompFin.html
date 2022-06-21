@@ -1,0 +1,1550 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第10回 機械学習入門 線形回帰モデル &#8212; コンピュテーショナル・ファイナンス</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="第9回 モンテカルロ法2" href="09CompFin.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">コンピュテーショナル・ファイナンス</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="この本を検索..." aria-label="この本を検索..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   コンピュテーショナル・ファイナンス
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01CompFin.html">
+   第1回 Pythonの基礎1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02CompFin.html">
+   第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04CompFin.html">
+   第4回 関数、行列、最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05CompFin.html">
+   第5回 確率過程と確率微分方程式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06CompFin.html">
+   第6回 ツリーモデル1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07CompFin.html">
+   第7回 ツリーモデル2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08CompFin.html">
+   第8回 モンテカルロ法1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09CompFin.html">
+   第9回 モンテカルロ法2
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第10回 機械学習入門 線形回帰モデル
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="ナビゲーションを切り替え" aria-controls="site-navigation"
+                title="ナビゲーションを切り替え" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="このページをダウンロード"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/10CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="ソースファイルをダウンロード" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDFに印刷"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全画面モード"
+        title="全画面モード"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/skamimura0709/CompFin2022/gh-pages?urlpath=tree/_sources/10CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/skamimura0709/CompFin2022/blob/gh-pages/_sources/10CompFin.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="発売 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 目次
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   機械学習に関する参考書
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   機械学習とは何か
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   線形回帰モデル
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   線形回帰モデル推定の実際
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   訓練誤差と汎化誤差
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   多項式回帰
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   正則化
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ridge">
+     Ridge回帰（リッジ回帰）
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     特徴量のスケーリング
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第10回 機械学習入門 線形回帰モデル</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 目次 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   機械学習に関する参考書
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   機械学習とは何か
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   線形回帰モデル
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   線形回帰モデル推定の実際
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   訓練誤差と汎化誤差
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   多項式回帰
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   正則化
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ridge">
+     Ridge回帰（リッジ回帰）
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     特徴量のスケーリング
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第10回 機械学習入門 線形回帰モデル<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>機械学習に関する参考書<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>理論については</p>
+<ul class="simple">
+<li><p>Bishop, C. M. (2016): Pattern Recognition and Machine Learning, Springer.（「パターン認識と機械学習 上・下」 丸善出版）.</p></li>
+<li><p>Hastie, T., R. Tibshirani, and J. Friedman. (2013): The Elements of Statistical Learning, 2nd Edition, Springer.（「統計的学習の基礎」共立出版）</p></li>
+<li><p>Goodfellow, I., Y. Bengio, and A. Courville. (2016): Deep Learning, MIT Press.（「深層学習」KADOKAWA）</p></li>
+</ul>
+<p>など。</p>
+<p>Pythonで実装しながら、理論についてもある程度説明した本として</p>
+<ul class="simple">
+<li><p>Géron, A. (2019): Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition, O’Reilly.（ 「scikit-learn、Keras、TensorFlowによる実践機械学習 第2版」 オライリー）</p></li>
+<li><p>Muller, A. C., S. Guido. (2016): Introduction to Machine Learning with Python, O’Reilly.（「Pythonではじめる機械学習」オライリー）</p></li>
+<li><p>Raschka, S., V. Mirjalili.(2019): Python Machine Learning: Machine Learning and Deep Learning with Python, 3rd Edition, Packt Publishing. （「Python機械学習プログラミング 第3版」インプレス）</p></li>
+</ul>
+<p>など。Pythonの機械学習系ライブラリ（scikit-learn, numpy, pandas等）は頻繁にバージョンアップするので、本と併せてマニュアルも見たほうがよい。</p>
+</div>
+<div class="section" id="id3">
+<h2>機械学習とは何か<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>データに潜んでいる法則性を見つけ出し、それに基づいた予測や判断を行うためのアルゴリズムの総称を機械学習という。
+Mitchell(1997)※は機械（コンピュータプログラム）が学習をするとは、
+経験<span class="math notranslate nohighlight">\(E\)</span>を通じてタスク<span class="math notranslate nohighlight">\(T\)</span>のパフォーマンス<span class="math notranslate nohighlight">\(P\)</span>が向上すること、
+と定義している。
+この定義によれば、機械学習の基本的な構成要素はタスク<span class="math notranslate nohighlight">\(T\)</span>、
+パフォーマンス尺度<span class="math notranslate nohighlight">\(P\)</span>、経験<span class="math notranslate nohighlight">\(E\)</span>ということになる。
+タスク<span class="math notranslate nohighlight">\(T\)</span>とは例えば、不動産の価格予測、画像認識であり、
+経験<span class="math notranslate nohighlight">\(E\)</span>とは過去に取得された不動産価格やその不動産の属性データ、画像データである。
+パフォーマンス尺度<span class="math notranslate nohighlight">\(P\)</span>は例えば、予測された不動産価格と真の値との差や画像認識の正答率のような、誤差を計測する尺度である。</p>
+<p>※ Mitchell, T. M. (1997): Machine Learning, McGraw-Hill.</p>
+<p>機械学習にはいくつかの分類があり、つぎの3つに分類されることが多い。</p>
+<ul class="simple">
+<li><p>教師あり学習</p></li>
+<li><p>教師なし学習</p></li>
+<li><p>強化学習</p></li>
+</ul>
+<p>本講義では教師あり学習を扱う。</p>
+<p>教師あり学習では、まず<span class="math notranslate nohighlight">\(N\)</span>個のデータのペア
+<span class="math notranslate nohighlight">\(\{(\mathbf{x}_i,y_i)\}_{i=1,2,\ldots,N}\)</span>
+が与えられる。
+これらを訓練データと呼ぶ．
+ここで <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> は特徴量と呼ばれる入力データ（ベクトル）、<span class="math notranslate nohighlight">\(y_i\)</span> は <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> に対応する正解（またはラベル）と呼ばれる出力データを表す。
+教師あり学習では訓練データから特徴量<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>と正解<span class="math notranslate nohighlight">\(y\)</span>の対応関係を表す関数 <span class="math notranslate nohighlight">\(f\)</span>（<span class="math notranslate nohighlight">\(y=f(\mathbf{x})\)</span>）を推定することが目標となる。</p>
+<p><span class="math notranslate nohighlight">\(y\)</span>が連続値を取るとき、このタスクを回帰という。
+例えば、<span class="math notranslate nohighlight">\(y\)</span>が不動産価格で、<span class="math notranslate nohighlight">\(\mathbf{x}\)</span> が最寄り駅からの距離や建築年数などの属性データであるとき、<span class="math notranslate nohighlight">\(\mathbf{x}\)</span> から <span class="math notranslate nohighlight">\(y\)</span> を推定する問題が回帰である。</p>
+<p>一方、<span class="math notranslate nohighlight">\(y\)</span> が離散的なデータ、例えば <span class="math notranslate nohighlight">\(y\)</span> が <span class="math notranslate nohighlight">\(0\)</span> または <span class="math notranslate nohighlight">\(1\)</span> の値をとるとき、このタスクを分類という。
+例えば、<span class="math notranslate nohighlight">\(\mathbf{x}\)</span> が動物の画像データであり、<span class="math notranslate nohighlight">\(y\)</span> が犬か（<span class="math notranslate nohighlight">\(y=1\)</span>）、そうでないか（<span class="math notranslate nohighlight">\(y=0\)</span>）を表すような場合である。</p>
+<p>教師あり学習の多くのアルゴリズムでは関数 <span class="math notranslate nohighlight">\(f\)</span> を直接推定するのではなく、
+パラメータ化された関数 <span class="math notranslate nohighlight">\(f(\mathbf{x};\mathbf{w})\)</span> を考え、
+パラメータ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> を推定する問題に帰着させる。
+本講義でもパラメータ化された関数の推定のみを扱う。</p>
+<p>パフォーマンス尺度<span class="math notranslate nohighlight">\(P\)</span>は何らかの誤差によって定義される。
+この誤差を表す関数を損失関数と呼ぶことにしよう。
+パラメータ化された関数<span class="math notranslate nohighlight">\(f(\mathbf{x};\mathbf{w})\)</span>を考えるときには、
+損失関数はパラメータ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> の関数
+<span class="math notranslate nohighlight">\(L\left(\mathbf{w}\right)\)</span> となる。
+モデルを<span class="math notranslate nohighlight">\(y=f(\mathbf{x}; \mathbf{w})\)</span>としたときの、
+個々の訓練データ <span class="math notranslate nohighlight">\((\mathbf{x}_i,y_i)\)</span> の誤差を関数 <span class="math notranslate nohighlight">\(l\)</span> を用いて <span class="math notranslate nohighlight">\(l(\mathbf{x}_i,y_i;\mathbf{w})\)</span> と表現すれば、損失関数は</p>
+<div class="math notranslate nohighlight">
+\[
+  L(\mathbf{w}) = \frac{1}{N}\sum_{i=1}^N l(\mathbf{x}_i, y_i; \mathbf{w})
+\]</div>
+<p>と書くことができる。
+例えば、誤差を二乗誤差により定義すると、</p>
+<div class="math notranslate nohighlight">
+\[
+  L(\mathbf{w}) = \frac{1}{N}\sum_{i=1}^N \{y_i - f(\mathbf{x}_i; \mathbf{w})\}^2
+\]</div>
+<p>が損失関数となる。
+そして、最適化問題</p>
+<div class="math notranslate nohighlight">
+\[
+  \min_\mathbf{w}\ L(\mathbf{w})  
+\]</div>
+<p>の解 <span class="math notranslate nohighlight">\(\mathbf{w}^\ast\)</span> によって得られた関数
+<span class="math notranslate nohighlight">\(f(\mathbf{x};\mathbf{w}^\ast)\)</span> が推定された関数となる。</p>
+</div>
+<div class="section" id="id4">
+<h2>線形回帰モデル<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>特徴量 <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, x_2, \dots, x_D)^T\)</span> と正解 <span class="math notranslate nohighlight">\(y\)</span> の間の関係をパラメータ <span class="math notranslate nohighlight">\(\mathbf{w}=(w_0,w_1,…,w_D )^T\)</span> を用いて</p>
+<div class="math notranslate nohighlight">
+\[ \tag{1}
+  y = w_0 + w_1x_1 + \dots + w_Dx_D = w_0 + \sum_{i=1}^D w_i x_i 
+\]</div>
+<p>とするモデルを<strong>線形回帰モデル</strong>という。機械学習では <span class="math notranslate nohighlight">\(w_0\)</span> をバイアスと呼ぶ。</p>
+<p>パラメータ<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>を改めて
+<span class="math notranslate nohighlight">\(\mathbf{x} = (1, x_1, x_2, \dots, x_D)^T\)</span> と定義すれば、
+(1)は</p>
+<div class="math notranslate nohighlight">
+\[ \tag{2}
+y = \mathbf{w}^T\mathbf{x}
+\]</div>
+<p>と簡潔に書ける。</p>
+<p>線形回帰モデルは統計学や計量経済学においてもよく用いられるモデルである。
+しかし、統計学や計量経済学においては回帰係数 <span class="math notranslate nohighlight">\(w_i\)</span> の統計的有意性や特徴量（説明変数）と正解（被説明変数）の間の相関関係または因果関係に主な関心がある一方、機械学習においては汎化誤差（後ほど定義する）の最小化、すなわち精度のよい予測をすることに主な関心がある。</p>
+<p>訓練データを<span class="math notranslate nohighlight">\(\{(\mathbf{x}_i,y_i)\}_{i=1,2,\ldots,N}\)</span>とする。
+<span class="math notranslate nohighlight">\(\mathbf{x}_i = (x_{i1}, x_{i2}, \dots, x_{iD})^T\)</span>である。
+線形回帰では平均二乗誤差</p>
+<div class="math notranslate nohighlight">
+\[\tag{3}
+  L(\mathbf{w}) = \frac{1}{N}\sum_{i=1}^N\left(y_i - w_0 - \sum_{j=1}^Dw_jx_{ij}\right)^2 =\frac{1}{N}\sum_{i=1}^N\left(y_i - \mathbf{w}^T \mathbf{x}_i\right)^2
+\]</div>
+<p>を最小化する。
+損失関数 <span class="math notranslate nohighlight">\(L(\mathbf{w})\)</span> は凸関数であるため、
+最小化問題 <span class="math notranslate nohighlight">\(\min_{\mathbf{w}}L(\mathbf{w})\)</span>の解は
+<span class="math notranslate nohighlight">\(\nabla L(\mathbf{w})=0\)</span> を解くことによって求めることができる。</p>
+<p>(3)の解（正規方程式の解）は</p>
+<div class="math notranslate nohighlight">
+\[ \tag{4}
+  \mathbf{w}^* = \left(\mathbf{\Phi}^T \mathbf{\Phi} \right)^{-1} \mathbf{\Phi}^T \mathbf{y}
+\]</div>
+<p>と求まる。
+ここで <span class="math notranslate nohighlight">\(\mathbf{y}=(y_1,y_2,…,y_N )^T\)</span>，</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \mathbf{\Phi} =
+  \left(
+  \begin{array}{cccc}
+    1 &amp; x_{11} &amp; \ldots &amp; x_{1D} \\
+    1 &amp; x_{21} &amp; \ldots &amp; x_{2D} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1 &amp; x_{N1} &amp; \ldots &amp; x_{ND}
+  \end{array}  
+  \right)
+\end{split}\]</div>
+<p>である。</p>
+<p>数学的には簡潔な解を求めることができるが，
+機械学習ではデータ数 <span class="math notranslate nohighlight">\(N\)</span> が非常に大きいことが通常であり、
+その場合(4)の逆行列
+<span class="math notranslate nohighlight">\((\mathbf{\Phi}^T \mathbf{\Phi})^{-1}\)</span>を計算することは現実的でなく、実際には <span class="math notranslate nohighlight">\(\nabla L(\mathbf{w})=0\)</span> の解を（確率的）勾配降下法を使って近似することが多い。</p>
+</div>
+<div class="section" id="id5">
+<h2>線形回帰モデル推定の実際<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a>
+ライブラリを使って、Boston Housing Price Datasetを使って住宅価格の予測をする。
+<a class="reference external" href="https://drive.google.com/file/d/105PGKkTt3kWy1Q-AA25bWQPw8hiPTZcG/view?usp=sharing">データはこちらからダウンロード</a>
+する。</p>
+<p>Boston Housing Price Datasetの詳細については例えばつぎのサイトを見るとよい。<a class="reference external" href="https://www.kaggle.com/c/boston-housing">https://www.kaggle.com/c/boston-housing</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Googleドライブをマウントした後、pandasの<code class="docutils literal notranslate"><span class="pre">read_csv()</span></code>を使ってデータを読み込む。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./boston_housing_price.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>データの型を確認</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">boston_df</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>データの先頭を確認</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>INDEX</th>
+      <th>CRIM</th>
+      <th>ZN</th>
+      <th>INDUS</th>
+      <th>CHAS</th>
+      <th>NOX</th>
+      <th>RM</th>
+      <th>AGE</th>
+      <th>DIS</th>
+      <th>RAD</th>
+      <th>TAX</th>
+      <th>PTRATIO</th>
+      <th>B</th>
+      <th>LSTAT</th>
+      <th>MEDV</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>欠損値がないか、基本統計量を調べ、各変数のヒストグラムを描く。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 506 entries, 0 to 505
+Data columns (total 15 columns):
+ #   Column   Non-Null Count  Dtype  
+---  ------   --------------  -----  
+ 0   INDEX    506 non-null    int64  
+ 1   CRIM     506 non-null    float64
+ 2   ZN       506 non-null    float64
+ 3   INDUS    506 non-null    float64
+ 4   CHAS     506 non-null    int64  
+ 5   NOX      506 non-null    float64
+ 6   RM       506 non-null    float64
+ 7   AGE      506 non-null    float64
+ 8   DIS      506 non-null    float64
+ 9   RAD      506 non-null    int64  
+ 10  TAX      506 non-null    int64  
+ 11  PTRATIO  506 non-null    float64
+ 12  B        506 non-null    float64
+ 13  LSTAT    506 non-null    float64
+ 14  MEDV     506 non-null    float64
+dtypes: float64(11), int64(4)
+memory usage: 59.4 KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>INDEX</th>
+      <th>CRIM</th>
+      <th>ZN</th>
+      <th>INDUS</th>
+      <th>CHAS</th>
+      <th>NOX</th>
+      <th>RM</th>
+      <th>AGE</th>
+      <th>DIS</th>
+      <th>RAD</th>
+      <th>TAX</th>
+      <th>PTRATIO</th>
+      <th>B</th>
+      <th>LSTAT</th>
+      <th>MEDV</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+      <td>506.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>252.500000</td>
+      <td>3.613524</td>
+      <td>11.363636</td>
+      <td>11.136779</td>
+      <td>0.069170</td>
+      <td>0.554695</td>
+      <td>6.284634</td>
+      <td>68.574901</td>
+      <td>3.795043</td>
+      <td>9.549407</td>
+      <td>408.237154</td>
+      <td>18.455534</td>
+      <td>356.674032</td>
+      <td>12.653063</td>
+      <td>22.532806</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>146.213884</td>
+      <td>8.601545</td>
+      <td>23.322453</td>
+      <td>6.860353</td>
+      <td>0.253994</td>
+      <td>0.115878</td>
+      <td>0.702617</td>
+      <td>28.148861</td>
+      <td>2.105710</td>
+      <td>8.707259</td>
+      <td>168.537116</td>
+      <td>2.164946</td>
+      <td>91.294864</td>
+      <td>7.141062</td>
+      <td>9.197104</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.006320</td>
+      <td>0.000000</td>
+      <td>0.460000</td>
+      <td>0.000000</td>
+      <td>0.385000</td>
+      <td>3.561000</td>
+      <td>2.900000</td>
+      <td>1.129600</td>
+      <td>1.000000</td>
+      <td>187.000000</td>
+      <td>12.600000</td>
+      <td>0.320000</td>
+      <td>1.730000</td>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>126.250000</td>
+      <td>0.082045</td>
+      <td>0.000000</td>
+      <td>5.190000</td>
+      <td>0.000000</td>
+      <td>0.449000</td>
+      <td>5.885500</td>
+      <td>45.025000</td>
+      <td>2.100175</td>
+      <td>4.000000</td>
+      <td>279.000000</td>
+      <td>17.400000</td>
+      <td>375.377500</td>
+      <td>6.950000</td>
+      <td>17.025000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>252.500000</td>
+      <td>0.256510</td>
+      <td>0.000000</td>
+      <td>9.690000</td>
+      <td>0.000000</td>
+      <td>0.538000</td>
+      <td>6.208500</td>
+      <td>77.500000</td>
+      <td>3.207450</td>
+      <td>5.000000</td>
+      <td>330.000000</td>
+      <td>19.050000</td>
+      <td>391.440000</td>
+      <td>11.360000</td>
+      <td>21.200000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>378.750000</td>
+      <td>3.677083</td>
+      <td>12.500000</td>
+      <td>18.100000</td>
+      <td>0.000000</td>
+      <td>0.624000</td>
+      <td>6.623500</td>
+      <td>94.075000</td>
+      <td>5.188425</td>
+      <td>24.000000</td>
+      <td>666.000000</td>
+      <td>20.200000</td>
+      <td>396.225000</td>
+      <td>16.955000</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>505.000000</td>
+      <td>88.976200</td>
+      <td>100.000000</td>
+      <td>27.740000</td>
+      <td>1.000000</td>
+      <td>0.871000</td>
+      <td>8.780000</td>
+      <td>100.000000</td>
+      <td>12.126500</td>
+      <td>24.000000</td>
+      <td>711.000000</td>
+      <td>22.000000</td>
+      <td>396.900000</td>
+      <td>37.970000</td>
+      <td>50.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;AxesSubplot:title={&#39;center&#39;:&#39;INDEX&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;CRIM&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;ZN&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;INDUS&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;CHAS&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;NOX&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;RM&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;AGE&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;DIS&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;RAD&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;TAX&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;PTRATIO&#39;}&gt;],
+       [&lt;AxesSubplot:title={&#39;center&#39;:&#39;B&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;LSTAT&#39;}&gt;,
+        &lt;AxesSubplot:title={&#39;center&#39;:&#39;MEDV&#39;}&gt;, &lt;AxesSubplot:&gt;]],
+      dtype=object)
+</pre></div>
+</div>
+<img alt="_images/10CompFin_14_1.png" src="_images/10CompFin_14_1.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MEDV</span></code>が正解にあたる住宅価格、<code class="docutils literal notranslate"><span class="pre">CRIM</span></code>列から<code class="docutils literal notranslate"><span class="pre">LSTAT</span></code>列までが特徴量。<code class="docutils literal notranslate"><span class="pre">INDEX</span></code>は行名なので、後で削除する。</p>
+<p>最小二乗法を実行するにはscikit-learnライブラリのLinearRegressionクラス <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html</a>
+を使う。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>特徴量と正解の定義</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_df</span> <span class="o">=</span> <span class="n">boston_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;INDEX&#39;</span><span class="p">,</span> <span class="s1">&#39;MEDV&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_df</span> <span class="o">=</span> <span class="n">boston_df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">X_df</span></code>, <code class="docutils literal notranslate"><span class="pre">y_df</span></code>の先頭を確認</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CRIM</th>
+      <th>ZN</th>
+      <th>INDUS</th>
+      <th>CHAS</th>
+      <th>NOX</th>
+      <th>RM</th>
+      <th>AGE</th>
+      <th>DIS</th>
+      <th>RAD</th>
+      <th>TAX</th>
+      <th>PTRATIO</th>
+      <th>B</th>
+      <th>LSTAT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    24.0
+1    21.6
+2    34.7
+3    33.4
+4    36.2
+Name: MEDV, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>padasの<code class="docutils literal notranslate"><span class="pre">to_numpy()</span></code>メソッドにより、numpy配列に変換（やらなくてもよい？）</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_np</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_np</span> <span class="o">=</span> <span class="n">y_df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>最小二乗法を実行</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lnreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+</pre></div>
+</div>
+</div>
+</div>
+<p>回帰係数を確認。切片<span class="math notranslate nohighlight">\(w_0\)</span>は<code class="docutils literal notranslate"><span class="pre">.intercept_</span></code>、係数<span class="math notranslate nohighlight">\(w_1, \dots, w_n\)</span>は<code class="docutils literal notranslate"><span class="pre">.coef_</span></code>という属性により取り出すことができる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lnreg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lnreg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36.45948838508971
+[-1.08011358e-01  4.64204584e-02  2.05586264e-02  2.68673382e+00
+ -1.77666112e+01  3.80986521e+00  6.92224640e-04 -1.47556685e+00
+  3.06049479e-01 -1.23345939e-02 -9.52747232e-01  9.31168327e-03
+ -5.24758378e-01]
+</pre></div>
+</div>
+</div>
+</div>
+<p>つぎのようにすると回帰係数が見やすくなる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colnames</span> <span class="o">=</span> <span class="n">X_df</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lnreg</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CRIM</th>
+      <td>-0.108011</td>
+    </tr>
+    <tr>
+      <th>ZN</th>
+      <td>0.046420</td>
+    </tr>
+    <tr>
+      <th>INDUS</th>
+      <td>0.020559</td>
+    </tr>
+    <tr>
+      <th>CHAS</th>
+      <td>2.686734</td>
+    </tr>
+    <tr>
+      <th>NOX</th>
+      <td>-17.766611</td>
+    </tr>
+    <tr>
+      <th>RM</th>
+      <td>3.809865</td>
+    </tr>
+    <tr>
+      <th>AGE</th>
+      <td>0.000692</td>
+    </tr>
+    <tr>
+      <th>DIS</th>
+      <td>-1.475567</td>
+    </tr>
+    <tr>
+      <th>RAD</th>
+      <td>0.306049</td>
+    </tr>
+    <tr>
+      <th>TAX</th>
+      <td>-0.012335</td>
+    </tr>
+    <tr>
+      <th>PTRATIO</th>
+      <td>-0.952747</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.009312</td>
+    </tr>
+    <tr>
+      <th>LSTAT</th>
+      <td>-0.524758</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.score()</span></code>メソッドによりスコア（決定係数）を計算する。決定係数は0以上1以下の値をとり、値が1に近いほどモデルのデータへの当てはまりがよいことを表す。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7406426641094095
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>訓練誤差と汎化誤差<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>訓練データへの当てはまりの良さ（悪さ）を<strong>訓練誤差</strong>と呼ぶ。
+機械学習の目的は<strong>未知</strong>のデータに対する予測をすることであり、すでに手元にあるデータを良く説明することが目的ではない。
+未知のデータへの当てはまりの良さ（悪さ）を<strong>汎化誤差</strong>という。つまり、機械学習の目的は汎化誤差を小さくすることである。</p>
+<p>では、汎化誤差を計算するにはどうしたらよいか？ 未知のデータは当然入手することはできない。</p>
+<p>手元にあるデータをすべて使ってモデルを推定するのではなく、データを訓練用のデータとテスト用のデータに分けて、</p>
+<ul class="simple">
+<li><p>訓練用データを使ってモデルを推定する</p></li>
+<li><p>テスト用データを使ってスコアを計算する</p></li>
+</ul>
+<p>という手続きをとる。</p>
+<p>scikit-learn ライブラリの <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>関数 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a> を使うとデータを訓練用データとテスト用データに分けることができる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_np</span><span class="p">,</span> <span class="n">y_np</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">X_train</span></code>, <code class="docutils literal notranslate"><span class="pre">X_test</span></code>, <code class="docutils literal notranslate"><span class="pre">y_train</span></code>, <code class="docutils literal notranslate"><span class="pre">y_test</span></code>の大きさを見てみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(379, 13)
+(127, 13)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">X_train</span></code> と <code class="docutils literal notranslate"><span class="pre">y_train</span></code> を使って回帰モデルを推定する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnreg1</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lnreg1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+</pre></div>
+</div>
+</div>
+</div>
+<p>係数を表示</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lnreg1</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lnreg1</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.479664804532376
+[-9.78910352e-02  4.27789348e-02  5.91493507e-02  1.23149832e+00
+ -1.54902558e+01  4.35215724e+00 -4.69136797e-04 -1.37720645e+00
+  2.82085749e-01 -1.24919445e-02 -9.40011503e-01  6.62260713e-03
+ -5.48551054e-01]
+</pre></div>
+</div>
+</div>
+</div>
+<p>スコアを計算する。スコアはテスト用データを使って計算することに注意。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnreg1</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6862448857295746
+</pre></div>
+</div>
+</div>
+</div>
+<p>訓練データのスコアも計算しておく。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnreg1</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7520477761303055
+</pre></div>
+</div>
+</div>
+</div>
+<p>訓練誤差に比べて汎化誤差が大きいとき（訓練スコアに比べて汎化スコアが小さいとき）は<strong>過学習</strong>（over-fitting）が起こっている可能性がある。</p>
+<p>さて、汎化誤差をさらに小さく（テストデータに対するスコアを大きく）するにはどうしたらよいか？</p>
+</div>
+<div class="section" id="id7">
+<h2>多項式回帰<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>汎化誤差を小さくするには、データを増やす、特徴量を増やす、あたりがまず思いつく。手持ちの特徴量からさらに特徴量を増やす方法として、<strong>多項式回帰</strong>がある。
+例えば、特徴量が<span class="math notranslate nohighlight">\(x_1, x_2\)</span>の2つであるとき、2次の多項式回帰では
+特徴量として<span class="math notranslate nohighlight">\(x_1, x_2, x_1^2, x_2^2, x_1x_2\)</span>を用いる。</p>
+<p>scikit-learnの<code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code>クラスにより多項式を生成することができる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_np</span><span class="p">)</span>
+<span class="n">X_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_poly</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(506, 104)
+</pre></div>
+</div>
+</div>
+</div>
+<p>訓練データとテストデータに分ける。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xp_train</span><span class="p">,</span> <span class="n">Xp_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span> <span class="n">y_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>回帰分析を実行</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnreg2</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lnreg2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xp_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearRegression()
+</pre></div>
+</div>
+</div>
+</div>
+<p>スコアを表示</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lnreg2</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xp_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lnreg2</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xp_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8337403062773849
+0.9339364478282827
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">PolynomialFeautres()</span></code>のオプションを<code class="docutils literal notranslate"><span class="pre">degree=3</span></code>（3次多項式）としたらどうなるか？</p>
+</div>
+<div class="section" id="id8">
+<h2>正則化<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>過学習を防ぐための方法として正則化がある。正則化にはRidge回帰、Lasso回帰、Elastic Net などがある。</p>
+<div class="section" id="ridge">
+<h3>Ridge回帰（リッジ回帰）<a class="headerlink" href="#ridge" title="Permalink to this headline">¶</a></h3>
+<p>線形回帰モデル
+$<span class="math notranslate nohighlight">\(
+y = w_0 + \sum_{i=1}^Dw_ix_i = \mathbf{w}^T\mathbf{x}
+\)</span><span class="math notranslate nohighlight">\(
+のパラメータ \)</span>\mathbf{w}$ を求めるために、最小二乗法では損失関数</p>
+<div class="math notranslate nohighlight">
+\[
+L(\mathbf{w}) = \sum_{i=1}^N\left(y_i - w_0 - \sum_{j=1}^Dw_jx_{ij}\right)^2 =\sum_{i=1}^N\left(y_i - \mathbf{w}^T\mathbf{x}_i\right)^2
+\]</div>
+<p>を最小にする<span class="math notranslate nohighlight">\(\mathbf{w}\)</span>を求めた。</p>
+<p>このとき、損失関数を</p>
+<p>\begin{align}
+L(\mathbf{w}) &amp;= \sum_{j=1}^N\left(y_i - w_0 - \sum_{i=1}^Dw_jx_{ij}\right)^2 + \alpha\sum_{j=1}^Dw_j^2\
+&amp;= \sum_{i=1}^N\left(y_i - \mathbf{w}^T\mathbf{x}_i\right)^2 + \alpha|\mathbf{w}|^2
+\end{align}</p>
+<p>として、パラメータを求める手法を<strong>Ridge回帰</strong>という。
+ここで、<span class="math notranslate nohighlight">\(\|\,\|\)</span>は２乗ノルム<span class="math notranslate nohighlight">\(\|w\| = \sqrt{\sum_{i=1}^Dw_j^2}\)</span>を表す。</p>
+<p>損失関数に<span class="math notranslate nohighlight">\(\sum_{i=1}^Dw_i^2\)</span>（<strong>正則化項</strong>という）が加わることにより、なるべく<strong>ゼロに近くなるように</strong>パラメータ<span class="math notranslate nohighlight">\(w_1, w_2, \dots, w_D\)</span>が求められる。すなわち、それぞれの<strong>特徴量</strong>の影響をなるべく小さくしたモデルで正解を推定しようとすることになる。</p>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>は正則化項の強さを表す係数であり、分析者があらかじめ決めなければならないパラメータ（<strong>ハイパーパラメータ</strong>）である。
+<span class="math notranslate nohighlight">\(\alpha\)</span>が大きいほど、パラメータがゼロに近づきやすい。</p>
+<p>正則化項を<span class="math notranslate nohighlight">\(\sum_{j=1}^D|w_j|\)</span>とした手法を<strong>Lasso回帰</strong>という。Lasso回帰の場合、<strong>ゼロとなるパラメータ数が多くなるように</strong>、パラメータ<span class="math notranslate nohighlight">\(w_1, w_2, \dots, w_D\)</span>が推定される。</p>
+</div>
+<div class="section" id="id9">
+<h3>特徴量のスケーリング<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>Ridge回帰をはじめとした正則化を適用するときには、特徴量を<strong>スケーリング</strong>することが必要になる。スケーリングとは異なる特徴量の尺度を統一することである。
+スケーリングにもいくつかの手法がある。<strong>標準化</strong>は特徴量の平均を<span class="math notranslate nohighlight">\(0\)</span>、標準偏差を<span class="math notranslate nohighlight">\(1\)</span>に統一する変換である。<strong>正規化</strong>は特徴量の最大値を<span class="math notranslate nohighlight">\(1\)</span>、最小値を<span class="math notranslate nohighlight">\(0\)</span>に統一する変換である。
+ここでは標準化を使う。</p>
+<p>標準化とは特徴量のデータ<span class="math notranslate nohighlight">\(X_i\)</span>（<span class="math notranslate nohighlight">\(i=1,2,\dots,N\)</span>)を
+$<span class="math notranslate nohighlight">\(
+X^{\text{std}}_i = \frac{X_i - \mu_X}{\sigma_X}
+\)</span><span class="math notranslate nohighlight">\(
+と変換するものである。
+ここで、\)</span>\mu_X<span class="math notranslate nohighlight">\(, \)</span>\sigma_X<span class="math notranslate nohighlight">\( はそれぞれ \)</span>X_i<span class="math notranslate nohighlight">\(（\)</span>i=1, \dots, N$） の平均、標準偏差である。</p>
+<p>ちなみに正解<span class="math notranslate nohighlight">\(y\)</span>をスケーリングする必要はない。</p>
+<p>scikit-learnの<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>関数を用いると標準化ができる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xp_train</span><span class="p">)</span>
+<span class="n">Xp_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xp_train</span><span class="p">)</span>
+<span class="n">Xp_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xp_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>通常の回帰分析は<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスを用いたが、Ridge回帰ではその代わりに<code class="docutils literal notranslate"><span class="pre">Ridge</span></code>クラスを用いる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xp_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ridge(alpha=1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>スコアの計算</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xp_test_scaled</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xp_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8226568793869662
+0.9167220394152795
+</pre></div>
+</div>
+</div>
+</div>
+<p>機械学習においては回帰分析をする際（多項式回帰でなくても）、特に理由がなければRidge回帰（もしくはLasso回帰、Elastic Net）を使う。</p>
+<p>また、訓練データとテストデータの分け方によってもスコアが変わる。そこで、訓練データとテストデータの分け方をさまざまに変化させてスコアを計算し、そのスコアの平均を計算する方法を<strong>交差検証</strong>という。
+scikit-learnでは<code class="docutils literal notranslate"><span class="pre">sklearn.model_selection</span></code>モジュールの<code class="docutils literal notranslate"><span class="pre">cross_val_score</span></code>関数により交差検証を行うことができる。</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="09CompFin.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第9回 モンテカルロ法2</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
