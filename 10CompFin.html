@@ -1392,8 +1392,8 @@ Name: MEDV, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8360985113588161
-0.9265895362028498
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8130894308549278
+0.9411843978847916
 </pre></div>
 </div>
 </div>
@@ -1405,11 +1405,12 @@ Name: MEDV, dtype: float64
 <p>過学習を防ぐための方法として正則化がある。正則化にはRidge回帰、Lasso回帰、Elastic Net などがある。</p>
 <div class="section" id="ridge">
 <h3>Ridge回帰（リッジ回帰）<a class="headerlink" href="#ridge" title="Permalink to this headline">¶</a></h3>
-<p>線形回帰モデル
-$<span class="math notranslate nohighlight">\(
+<p>線形回帰モデル</p>
+<div class="math notranslate nohighlight">
+\[
 y = w_0 + \sum_{i=1}^Dw_ix_i = \mathbf{w}^T\mathbf{x}
-\)</span><span class="math notranslate nohighlight">\(
-のパラメータ \)</span>\mathbf{w}$ を求めるために、最小二乗法では損失関数</p>
+\]</div>
+<p>のパラメータ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> を求めるために、最小二乗法では損失関数</p>
 <div class="math notranslate nohighlight">
 \[
 L(\mathbf{w}) = \sum_{i=1}^N\left(y_i - w_0 - \sum_{j=1}^Dw_jx_{ij}\right)^2 =\sum_{i=1}^N\left(y_i - \mathbf{w}^T\mathbf{x}_i\right)^2
@@ -1482,8 +1483,8 @@ X^{\text{std}}_i = \frac{X_i - \mu_X}{\sigma_X}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8966312327475933
-0.9026520226078079
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8700921947422662
+0.9141942221370808
 </pre></div>
 </div>
 </div>
