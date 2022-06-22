@@ -1392,8 +1392,8 @@ Name: MEDV, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8130894308549278
-0.9411843978847916
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8581342317250533
+0.9336400342503969
 </pre></div>
 </div>
 </div>
@@ -1434,12 +1434,13 @@ L(\mathbf{w}) = \sum_{j=1}^N\left(y_i - w_0 - \sum_{i=1}^Dw_jx_{ij}\right)^2 + \
 <p>Ridge回帰をはじめとした正則化を適用するときには、特徴量を<strong>スケーリング</strong>することが必要になる。スケーリングとは異なる特徴量の尺度を統一することである。
 スケーリングにもいくつかの手法がある。<strong>標準化</strong>は特徴量の平均を<span class="math notranslate nohighlight">\(0\)</span>、標準偏差を<span class="math notranslate nohighlight">\(1\)</span>に統一する変換である。<strong>正規化</strong>は特徴量の最大値を<span class="math notranslate nohighlight">\(1\)</span>、最小値を<span class="math notranslate nohighlight">\(0\)</span>に統一する変換である。
 ここでは標準化を使う。</p>
-<p>標準化とは特徴量のデータ<span class="math notranslate nohighlight">\(X_i\)</span>（<span class="math notranslate nohighlight">\(i=1,2,\dots,N\)</span>)を
-$<span class="math notranslate nohighlight">\(
+<p>標準化とは特徴量のデータ<span class="math notranslate nohighlight">\(X_i\)</span>（<span class="math notranslate nohighlight">\(i=1,2,\dots,N\)</span>)を</p>
+<div class="math notranslate nohighlight">
+\[
 X^{\text{std}}_i = \frac{X_i - \mu_X}{\sigma_X}
-\)</span><span class="math notranslate nohighlight">\(
-と変換するものである。
-ここで、\)</span>\mu_X<span class="math notranslate nohighlight">\(, \)</span>\sigma_X<span class="math notranslate nohighlight">\( はそれぞれ \)</span>X_i<span class="math notranslate nohighlight">\(（\)</span>i=1, \dots, N$） の平均、標準偏差である。</p>
+\]</div>
+<p>と変換するものである。
+ここで、<span class="math notranslate nohighlight">\(\mu_X\)</span>, <span class="math notranslate nohighlight">\(\sigma_X\)</span> はそれぞれ <span class="math notranslate nohighlight">\(X_i\)</span>（<span class="math notranslate nohighlight">\(i=1, \dots, N\)</span>） の平均、標準偏差である。</p>
 <p>ちなみに正解<span class="math notranslate nohighlight">\(y\)</span>をスケーリングする必要はない。</p>
 <p>scikit-learnの<code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>関数を用いると標準化ができる。</p>
 <div class="cell docutils container">
@@ -1483,8 +1484,8 @@ X^{\text{std}}_i = \frac{X_i - \mu_X}{\sigma_X}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8700921947422662
-0.9141942221370808
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8692461378381846
+0.9095965049028044
 </pre></div>
 </div>
 </div>
