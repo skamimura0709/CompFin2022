@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第12回 機械学習入門3 決定木 &#8212; コンピュテーショナル・ファイナンス</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="第11回 機械学習入門2 勾配降下法、ロジスティック回帰、クラスタリング" href="11CompFin.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">コンピュテーショナル・ファイナンス</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="この本を検索..." aria-label="この本を検索..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   コンピュテーショナル・ファイナンス
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01CompFin.html">
+   第1回 Pythonの基礎1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02CompFin.html">
+   第2回 Pyhtonの基礎2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03CompFin.html">
+   第3回 NumpyとPandas（金融時系列データ）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04CompFin.html">
+   第4回 関数、行列、最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05CompFin.html">
+   第5回 確率過程と確率微分方程式
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06CompFin.html">
+   第6回 ツリーモデル1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07CompFin.html">
+   第7回 ツリーモデル2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08CompFin.html">
+   第8回 モンテカルロ法1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09CompFin.html">
+   第9回 モンテカルロ法2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10CompFin.html">
+   第10回 機械学習入門1 線形回帰モデル
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11CompFin.html">
+   第11回 機械学習入門2 勾配降下法、ロジスティック回帰、クラスタリング
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第12回 機械学習入門3 決定木
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="ナビゲーションを切り替え" aria-controls="site-navigation"
+                title="ナビゲーションを切り替え" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="このページをダウンロード"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/12CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="ソースファイルをダウンロード" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDFに印刷"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全画面モード"
+        title="全画面モード"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/skamimura0709/CompFin2022/gh-pages?urlpath=tree/_sources/12CompFin.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="発売 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/skamimura0709/CompFin2022/blob/gh-pages/_sources/12CompFin.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="発売 Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 目次
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cart">
+   CART
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     決定木による分類（分類木）
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     CARTアルゴリズム
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     決定木による回帰（回帰木）
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   アンサンブル学習
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     ランダムフォレスト
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     勾配ブースティング決定木
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   参考: グリッドサーチ
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第12回 機械学習入門3 決定木</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> 目次 </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cart">
+   CART
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     決定木による分類（分類木）
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     CARTアルゴリズム
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     決定木による回帰（回帰木）
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   アンサンブル学習
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     ランダムフォレスト
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     勾配ブースティング決定木
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   参考: グリッドサーチ
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>第12回 機械学習入門3 決定木<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>決定木は回帰と分類の両方に適用できるアルゴリズムである。CART（Classification and Regression Tree）と呼ばれる、それぞれのノードが2つの子ノードのみを持つ（二分木）アルゴリズムを紹介する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cart">
+<h2>CART<a class="headerlink" href="#cart" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>決定木による分類（分類木）<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>アヤメのデータを用いてCARTアルゴリズムによる予測を実行してみる。scikit-learnの<code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>クラスを用いる。DecisionTreeClassifierについては以下を参照：
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html">https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html</a></p>
+<p>データはscikit-learnライブラリから読み込む。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># このセルを実行すれば、`Xi_np`に特徴量、`yi_np`に正解が代入される。</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">Xi_np</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">yi_np</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>訓練データとテストデータに分割。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xi_train</span><span class="p">,</span> <span class="n">Xi_test</span><span class="p">,</span> <span class="n">yi_train</span><span class="p">,</span> <span class="n">yi_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">Xi_np</span><span class="p">,</span> <span class="n">yi_np</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>決定木では特徴量のスケーリングは不要である。</p>
+<p><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>クラスをインポート</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>決定木による予測を行う。<code class="docutils literal notranslate"><span class="pre">max_depth</span></code>オプションで決定木の深さを指定する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xi_train</span><span class="p">,</span> <span class="n">yi_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeClassifier(max_depth=2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>スコアを計算する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xi_test</span><span class="p">,</span> <span class="n">yi_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xi_train</span><span class="p">,</span> <span class="n">yi_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9473684210526315
+0.9642857142857143
+</pre></div>
+</div>
+</div>
+</div>
+<p>決定木を図示する。<code class="docutils literal notranslate"><span class="pre">plot_tree</span></code>メソッドを使う。
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.plot_tree.html">https://scikit-learn.org/stable/modules/generated/sklearn.tree.plot_tree.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">plot_tree</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>特徴量と正解の名称を見ておく。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;sepal length (cm)&#39;, &#39;sepal width (cm)&#39;, &#39;petal length (cm)&#39;, &#39;petal width (cm)&#39;]
+[&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>決定木の図示。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12CompFin_19_0.png" src="_images/12CompFin_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>CARTアルゴリズム<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>決定木は特徴量の空間を軸に平行な境界のみにより分割し予測を行うアルゴリズムである。</p>
+<p>[特徴量空間と決定境界の図を挿入]</p>
+<p>厳密には以下のように定義される。まず、<span class="math notranslate nohighlight">\(R_i\)</span>（<span class="math notranslate nohighlight">\(i=1,\dots,J\)</span>）を特徴量空間の互いに交わらない集合とする。このとき、以下のモデルを決定木という。</p>
+<div class="math notranslate nohighlight">
+\[
+T(x; \Theta) = \sum_{j=1}^J\gamma_j I(x \in R_j)
+\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(\Theta=\{R_j, \gamma_j\}_{j=1,\dots,J}\)</span>はパラメータであり、<span class="math notranslate nohighlight">\(J\)</span>は領域の数を表すハイパーパラメータである。このように定義したとき、何らかの損失関数<span class="math notranslate nohighlight">\(L(y, \hat{y})\)</span>に対して</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{j=1}^J\sum_{x_i \in R_j}L(y_i, \gamma_i)
+\]</div>
+<p>を最小にするパラメータ<span class="math notranslate nohighlight">\(R_j, \gamma_j\)</span>を求めればよい。
+（例えば、回帰の場合<span class="math notranslate nohighlight">\(L(y, \hat{y}) = (y - \hat{y})^2\)</span>）
+一般にこの最小化問題を解くことは難しいため、以下のように順次特徴量空間を分割するアルゴリズムを採用する。</p>
+<p>一番上のノードからスタートし、順次子ノードを2つ作っていく。
+各ノードにおいて、どのような基準で2つの子ノードを作るかがポイントとなる。
+各ノードにおいては、適切な特徴量<span class="math notranslate nohighlight">\(X\)</span>としきい値<span class="math notranslate nohighlight">\(t\)</span>を選ぶことができれば、
+<span class="math notranslate nohighlight">\(X \leq t\)</span>を満たすデータとそれ以外（<span class="math notranslate nohighlight">\(X &gt; t\)</span>）のデータに分けて子ノードを作ることができる。
+では、適切な<span class="math notranslate nohighlight">\(X\)</span>と<span class="math notranslate nohighlight">\(t\)</span>をどのように選べばよいか？</p>
+<p>まず、ノードの<strong>不純度</strong>を定義する。
+不純度は各ノードにおけるデータのクラスの「混じり気」の大きさを表す指標である。
+ノードに1つのクラスのデータしか含まれない場合は、不純度は0となり（例えば、上図の上から2段め左（オレンジ色）のノード）、各クラスが同じ数含まれるノードの不純度は最大となる。
+<code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>クラスではデフォルトで<strong>Gini不純度</strong>により、不純度が計算される。Gini不純度の定義は以下である。</p>
+<div class="math notranslate nohighlight">
+\[
+G = 1 - \sum_{k=1}^Kp_k^2
+\]</div>
+<p>ここで、<span class="math notranslate nohighlight">\(K\)</span>はクラスの数、<span class="math notranslate nohighlight">\(p_k\)</span>はそのノードに含まれるデータに占めるクラス<span class="math notranslate nohighlight">\(k\)</span>のデータの割合。エントロピーと呼ばれる不純度が使われるときもある。</p>
+<p>いま、あるノードの不純度を<span class="math notranslate nohighlight">\(G_{\text{parent}}\)</span>、その左子ノード、右子ノードの不純度をそれぞれ、<span class="math notranslate nohighlight">\(G_{\text{letf}}\)</span>, <span class="math notranslate nohighlight">\(G_{\text{right}}\)</span>と置く。また、ノードに含まれるデータ数を<span class="math notranslate nohighlight">\(m\)</span>、左子ノード、右子ノードに含まれるデータ数をそれぞれ <span class="math notranslate nohighlight">\(m_{\text{left}}\)</span>, <span class="math notranslate nohighlight">\(m_{\text{right}}\)</span>としたとき、
+不純度の減少分</p>
+<div class="math notranslate nohighlight">
+\[
+G_{\text{parent}} - 
+\left(\frac{m_{\text{left}}}{m}G_{\text{left}} 
++ \frac{m_{\text{right}}}{m}G_{\text{right}}\right)
+\]</div>
+<p>が最大になるように特徴量<span class="math notranslate nohighlight">\(X\)</span>としきい値<span class="math notranslate nohighlight">\(t\)</span>を決定する。</p>
+<p>こうして、一定の深さを持つ決定木が構成されたとする。
+新たな特徴量に対しクラスを予測するには、その特徴量に決定木を適用して、最後に含まれる<strong>葉ノード</strong>（子ノードのないノード）において、もっとも多数を占めるデータのクラスがその特徴量に対するクラスの予測値となる。
+たとえば、上図において、上から3段目右ノード（紫色のノード）には、
+setosaが0, versicolorが1, virginicaが31なのでvirginicaと予測する。</p>
+<p>決定木の深さ <code class="docutils literal notranslate"><span class="pre">max_depth</span></code> はあらかじめ指定する必要のあるハイパーパラメータである。決定木の深さを非常に大きくすれば、訓練データに対する当てはまりが100%の決定木を作ることはできるが、過学習が起きる可能性が高い。過学習を防ぐように深さを決定する必要がある。</p>
+</div>
+<div class="section" id="id4">
+<h3>決定木による回帰（回帰木）<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>回帰に対しても分類とほぼ同様にCARTアルゴリズムが適用できる。
+ノードの分割を決定する際、不純度の代わりに、平均二乗誤差</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE}
+= \frac{1}{N}\sum_{i}(y_i - \bar{y})^2
+\]</div>
+<p>を用いればよい。ここで、<span class="math notranslate nohighlight">\(N\)</span>はそのノードに含まれるデータ数、<span class="math notranslate nohighlight">\(\sum_{i}\)</span>はそのノードに含まれるすべてのデータについて和を取ることを意味する。
+<span class="math notranslate nohighlight">\(\text{MSE}\)</span>はそのノードに含まれるデータの正解<span class="math notranslate nohighlight">\(\{y_i\}\)</span>の分散に他ならない。</p>
+<p>あとは、分類木と同様に、平均二乗誤差の減少分</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE}_{\text{parent}} 
+- \left(\frac{m_{\text{left}}}{m}\text{MSE}_{\text{left}}+\frac{m_{\text{right}}}{m}\text{MSE}_{\text{right}}\right)
+\]</div>
+<p>が最大になるように、特徴量<span class="math notranslate nohighlight">\(X\)</span>としきい値<span class="math notranslate nohighlight">\(t\)</span>を選べばよい。</p>
+<p>scikit-learnのDecisionTreeRegressorクラス（<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html%EF%BC%89">https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html）</a> により回帰木を実行できる。
+例としてボストン住宅価格データを使う。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># このセルを実行すれば、`Xb_np`に特徴量、`yb_np`に正解が代入される。</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+<span class="n">Xb_np</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span>
+<span class="n">yb_np</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kamimura/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function load_boston is deprecated; `load_boston` is deprecated in 1.0 and will be removed in 1.2.
+
+    The Boston housing prices dataset has an ethical problem. You can refer to
+    the documentation of this function for further details.
+
+    The scikit-learn maintainers therefore strongly discourage the use of this
+    dataset unless the purpose of the code is to study and educate about
+    ethical issues in data science and machine learning.
+
+    In this special case, you can fetch the dataset from the original
+    source::
+
+        import pandas as pd
+        import numpy as np
+
+
+        data_url = &quot;http://lib.stat.cmu.edu/datasets/boston&quot;
+        raw_df = pd.read_csv(data_url, sep=&quot;\s+&quot;, skiprows=22, header=None)
+        data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+        target = raw_df.values[1::2, 2]
+
+    Alternative datasets include the California housing dataset (i.e.
+    :func:`~sklearn.datasets.fetch_california_housing`) and the Ames housing
+    dataset. You can load the datasets as follows::
+
+        from sklearn.datasets import fetch_california_housing
+        housing = fetch_california_housing()
+
+    for the California housing dataset and::
+
+        from sklearn.datasets import fetch_openml
+        housing = fetch_openml(name=&quot;house_prices&quot;, as_frame=True)
+
+    for the Ames housing dataset.
+    
+  warnings.warn(msg, category=FutureWarning)
+</pre></div>
+</div>
+</div>
+</div>
+<p>訓練データとテストデータに分割する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xb_train</span><span class="p">,</span> <span class="n">Xb_test</span><span class="p">,</span> <span class="n">yb_train</span><span class="p">,</span> <span class="n">yb_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">Xb_np</span><span class="p">,</span> <span class="n">yb_np</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">DecisionTreeRegressor</span></code>クラスのインポート</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>回帰木の構築</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xb_train</span><span class="p">,</span> <span class="n">yb_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeRegressor(max_depth=2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>スコアの計算</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xb_test</span><span class="p">,</span> <span class="n">yb_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xb_train</span><span class="p">,</span> <span class="n">yb_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5564791971697229
+0.7325690523735464
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">reg</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12CompFin_31_0.png" src="_images/12CompFin_31_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">reg</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.         0.         0.         0.         0.75131531
+ 0.         0.         0.         0.         0.         0.
+ 0.24868469]
+[&#39;CRIM&#39; &#39;ZN&#39; &#39;INDUS&#39; &#39;CHAS&#39; &#39;NOX&#39; &#39;RM&#39; &#39;AGE&#39; &#39;DIS&#39; &#39;RAD&#39; &#39;TAX&#39; &#39;PTRATIO&#39;
+ &#39;B&#39; &#39;LSTAT&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>アンサンブル学習<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>複数の機械学習モデル（予測器と呼ぶ）を組み合わせることで、精度の良い予測をしようとする手法を<strong>アンサンブル法</strong>という。</p>
+<p>1つ1つの予測器の精度が低くても、それらの予測器から予測された結果の多数決を取ることでより精度の良い予測をすることができる。
+たとえば、分類問題において51%の正解率をもつ予測器が1000個あったとする。
+これらの予測器の多数決により正解を予測するとすれば、正解率はいくつになるだろうか。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># 1つの予測器の正解率</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># 予測器の数</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+  <span class="n">prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">comb</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">prob</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.972900802242991
+</pre></div>
+</div>
+</div>
+</div>
+<p>正解率は約72%になる。ただし、この計算からも分かるように、各予測器の判断は<strong>独立でなくてはならない</strong>。</p>
+<p>ここでは、ランダムフォレストと勾配ブースティング決定木を取り上げる。</p>
+<div class="section" id="id6">
+<h3>ランダムフォレスト<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>少しずつ異なる決定木をランダムに複数作り、その多数決により予測をする手法を<strong>ランダムフォレスト</strong>とよぶ。ランダムフォレストでは通常の決定木アルゴリズムと下記の点が異なる。</p>
+<ul class="simple">
+<li><p>訓練データから重複を許してデータをランダムに抽出し（ブートストラップ標本を作るという）、新たな訓練データとして使う。</p></li>
+<li><p>各ノードにおいて、特徴量をランダムに非復元抽出し、抽出された特徴量により子ノードを作る。（決定木の場合と異なり、一部の特徴量を使って子ノードを作る）</p></li>
+</ul>
+<p>以上により、複数の決定木を生成し、予測の場合は多数決により、回帰の場合は予測値の平均により、予測を行う。</p>
+<p>scikit-learnでは、分類については RandamForestClassifier、回帰については RandomForestRegressor クラスによりランダムフォレストを実行できる。</p>
+<p>RandomForestClassifireクラス
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html</a></p>
+<p>RandomForestRegressorクラス
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html</a></p>
+<p>アヤメデータをランダムフォレストにかけてみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clfr</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_features</span><span class="o">=</span><span class="s1">&#39;sqrt&#39;</span><span class="p">)</span>
+<span class="n">clfr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xi_train</span><span class="p">,</span> <span class="n">yi_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomForestClassifier(max_depth=2, max_features=&#39;sqrt&#39;, n_estimators=1000)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">clfr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xi_test</span><span class="p">,</span> <span class="n">yi_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clfr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xi_train</span><span class="p">,</span> <span class="n">yi_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9473684210526315
+0.9642857142857143
+</pre></div>
+</div>
+</div>
+</div>
+<p>ランダムフォレストを図示することはできない。</p>
+<p><strong>演習問題</strong>
+ボストン住宅価格データを <code class="docutils literal notranslate"><span class="pre">RandomForestRegressor</span></code> により予測してみよ。</p>
+</div>
+<div class="section" id="id7">
+<h3>勾配ブースティング決定木<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>勾配ブースティング決定木では、予測器を逐次的に生成していく。
+その際、1つ前の決定木の残差（正解と予測値の差）を次の決定木が修正するように、決定木を順番に生成する。大雑把には</p>
+<div class="math notranslate nohighlight">
+\[
+(m+1)\text{番目の決定木} = m\text{番目の決定木} + \text{学習率} \times (m\text{番目の決定木の残差を予測する決定木})
+\]</div>
+<p>となる。<span class="math notranslate nohighlight">\((m\text{番目の決定木の残差を予測する決定木})\)</span>の部分が損失関数の勾配になるので、勾配ブースティングと呼ばれる。実際、数学的に表現をすると勾配降下法に似たアルゴリズムになる。</p>
+<p>scikit-learnでは勾配ブースティング回帰木についてはGradientBoostingRegressorクラス、勾配ブースティング分類木については
+GradientBoostingClassifierクラスを使えばよい。</p>
+<p>GradientBoostingRegressorクラス
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html</a></p>
+<p>GradientBoostingClassifierクラス
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html</a></p>
+<p>ボストン住宅価格データに<code class="docutils literal notranslate"><span class="pre">GradientBoostingRegressor</span></code>を適用してみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greg</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">greg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xb_train</span><span class="p">,</span> <span class="n">yb_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GradientBoostingRegressor(max_depth=2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">greg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xb_test</span><span class="p">,</span> <span class="n">yb_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">greg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xb_train</span><span class="p">,</span> <span class="n">yb_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8397400813073342
+0.9545303769358543
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>演習問題</strong> アヤメデータに勾配ブースティング分類木を適用してみよ。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>参考: グリッドサーチ<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>ハイパーパラメータを手動で調整して、良いスコアを探すのは大変。scikit-learnでは<code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>クラスにより<strong>グリッドサーチ</strong>（自動的に最適なハイパーパラメータを探す）を行うことができる。
+<code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>については以下を参照
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>は最適なハイパーパラメータを交差検証により探す。ランダムフォレストによるボストン住宅価格データの予測を例に、<code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code>を使ってみる。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>探索するランダムフォレストのハイパーパラメータ <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code>と<code class="docutils literal notranslate"><span class="pre">max_depth</span></code>の集合を定義する。ディクショナリの形式で記述する。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+              <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">greg</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">)</span>
+<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xb_train</span><span class="p">,</span> <span class="n">yb_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GridSearchCV(cv=5, estimator=GradientBoostingRegressor(max_depth=2),
+             param_grid={&#39;max_depth&#39;: [7, 8, 9, 10],
+                         &#39;n_estimators&#39;: [10, 100, 1000]},
+             scoring=&#39;r2&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_depth&#39;: 7, &#39;n_estimators&#39;: 1000}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_score_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8068200345543832
+</pre></div>
+</div>
+</div>
+</div>
+<p>スケーリングをする必要がある場合は、パイプラインを使うなど工夫が必要になる。</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="11CompFin.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第11回 機械学習入門2 勾配降下法、ロジスティック回帰、クラスタリング</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      著者 上村昌司 (kamimura@reitaku-u.ac.jp)<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
