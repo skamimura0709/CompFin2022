@@ -156,6 +156,11 @@ const thebe_selector_output = ".output, .cell_output"
    第12回 機械学習入門3 決定木
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13CompFin.html">
+   第13回 ニューラルネットワーク
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -443,10 +448,11 @@ const thebe_selector_output = ".output, .cell_output"
 機械学習において分析者があらかじめ設定すべきパラメータをハイパーパラメータと呼び、学習率はハイパーパラメータの一つである。
 学習率をステップ <span class="math notranslate nohighlight">\(k\)</span> によらず一定値 <span class="math notranslate nohighlight">\(\eta\)</span> とすることもある。
 学習率の設定法については問題に応じていろいろな手法が開発されているが，決定的な方法は存在せず、試行錯誤により設定せざるを得ない。</p>
-<p>機械学習では最小化する関数が
-$<span class="math notranslate nohighlight">\(
+<p>機械学習では最小化する関数が</p>
+<div class="math notranslate nohighlight">
+\[
    L(\mathbf{w}) = \frac{1}{N}\sum_{i=1}^Nl(\mathbf{x}_i,y_i;\mathbf{w})
-\)</span>$</p>
+\]</div>
 <p>という形をしている。
 機械学習においては訓練データ数 <span class="math notranslate nohighlight">\(N\)</span> は非常に大きい。
 したがって，損失関数の勾配の式</p>
@@ -1084,11 +1090,12 @@ $<span class="math notranslate nohighlight">\(
 P(C_1 | \mathbf{x} ; \mathbf{w}) = \sigma\left(\mathbf{w}^T\mathbf{x}\right)
 \]</div>
 <p>と定義する。<span class="math notranslate nohighlight">\(P(C_2 | \mathbf{x} ; \mathbf{w}) = 1 - P(C_1 | \mathbf{x} ; \mathbf{w})\)</span> である。</p>
-<p>例えば、計算の結果
-$<span class="math notranslate nohighlight">\(
+<p>例えば、計算の結果</p>
+<div class="math notranslate nohighlight">
+\[
 \sigma\left(\mathbf{w}^T\mathbf{x}\right) = 0.6
-\)</span><span class="math notranslate nohighlight">\(
-となったときは、\)</span>y=1<span class="math notranslate nohighlight">\(となる確率が\)</span>0.6<span class="math notranslate nohighlight">\(、したがって\)</span>y=0<span class="math notranslate nohighlight">\(となる確率が\)</span>0.4<span class="math notranslate nohighlight">\(なので\)</span>y=1$と予測することになる。</p>
+\]</div>
+<p>となったときは、<span class="math notranslate nohighlight">\(y=1\)</span>となる確率が<span class="math notranslate nohighlight">\(0.6\)</span>、したがって<span class="math notranslate nohighlight">\(y=0\)</span>となる確率が<span class="math notranslate nohighlight">\(0.4\)</span>なので<span class="math notranslate nohighlight">\(y=1\)</span>と予測することになる。</p>
 <p>係数<span class="math notranslate nohighlight">\(\mathbf{w}\)</span>は<strong>最尤法</strong>により推定する。</p>
 <p>訓練データ <span class="math notranslate nohighlight">\(\{(\mathbf{x}_i,y_i)\}_{i=1,2,…,N}\)</span> が観測される確率は</p>
 <div class="math notranslate nohighlight">
