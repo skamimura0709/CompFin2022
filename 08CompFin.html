@@ -37,12 +37,9 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -158,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13CompFin.html">
-   第13回 ニューラルネットワーク
+   第13回 機械学習入門4 ニューラルネットワーク
   </a>
  </li>
 </ul>
@@ -489,11 +486,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>である。</p>
 <p>ここで、<span class="math notranslate nohighlight">\(b\)</span>を上手く決めることによって<span class="math notranslate nohighlight">\({X}(b)\)</span>の分散が<span class="math notranslate nohighlight">\({X}\)</span>よりも小さくなるようにしたい。
 まず、<span class="math notranslate nohighlight">\({X_i}(b)\)</span>の標準偏差<span class="math notranslate nohighlight">\(\sigma_X(b)\)</span>を計算すると</p>
-<p>\begin{align}
+<div class="math notranslate nohighlight">
+\[
 \sigma_X^2(b)=V[{X_i(b)}] = V[X_i - b(Y_i - E[Y])]
-&amp;= V[X_i] + V[b(Y_i - E[Y])] -2b\mathrm{Cov}(X_i, Y_i - E[Y]) \
-&amp;= \sigma_X^2 + b^2 \sigma_Y^2 - 2b \sigma_X \sigma_Y \rho_{XY} \tag{2}
-\end{align}</p>
+ = V[X_i] + V[b(Y_i - E[Y])] -2b\mathrm{Cov}(X_i, Y_i - E[Y]) 
+ = \sigma_X^2 + b^2 \sigma_Y^2 - 2b \sigma_X \sigma_Y \rho_{XY} \tag{2}
+\]</div>
 <p>となる。
 ここで、<span class="math notranslate nohighlight">\(\sigma^2_X = V[X], \sigma^2_Y = V[Y]\)</span>, <span class="math notranslate nohighlight">\(\rho_{XY}\)</span>は
 <span class="math notranslate nohighlight">\(X,Y\)</span>の相関係数である。

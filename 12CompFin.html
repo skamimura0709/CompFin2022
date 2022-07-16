@@ -37,12 +37,9 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -55,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="第13回 ニューラルネットワーク" href="13CompFin.html" />
+    <link rel="next" title="第13回 機械学習入門4 ニューラルネットワーク" href="13CompFin.html" />
     <link rel="prev" title="第11回 機械学習入門2 勾配降下法、ロジスティック回帰、クラスタリング" href="11CompFin.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -158,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="13CompFin.html">
-   第13回 ニューラルネットワーク
+   第13回 機械学習入門4 ニューラルネットワーク
   </a>
  </li>
 </ul>
@@ -384,6 +381,20 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="cart">
 <h2>CART<a class="headerlink" href="#cart" title="Permalink to this headline">¶</a></h2>
@@ -563,46 +574,6 @@ setosaが0, versicolorが1, virginicaが31なのでvirginicaと予測する。</
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/kamimura/opt/anaconda3/envs/jupyter-book/lib/python3.9/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function load_boston is deprecated; `load_boston` is deprecated in 1.0 and will be removed in 1.2.
-
-    The Boston housing prices dataset has an ethical problem. You can refer to
-    the documentation of this function for further details.
-
-    The scikit-learn maintainers therefore strongly discourage the use of this
-    dataset unless the purpose of the code is to study and educate about
-    ethical issues in data science and machine learning.
-
-    In this special case, you can fetch the dataset from the original
-    source::
-
-        import pandas as pd
-        import numpy as np
-
-
-        data_url = &quot;http://lib.stat.cmu.edu/datasets/boston&quot;
-        raw_df = pd.read_csv(data_url, sep=&quot;\s+&quot;, skiprows=22, header=None)
-        data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
-        target = raw_df.values[1::2, 2]
-
-    Alternative datasets include the California housing dataset (i.e.
-    :func:`~sklearn.datasets.fetch_california_housing`) and the Ames housing
-    dataset. You can load the datasets as follows::
-
-        from sklearn.datasets import fetch_california_housing
-        housing = fetch_california_housing()
-
-    for the California housing dataset and::
-
-        from sklearn.datasets import fetch_openml
-        housing = fetch_openml(name=&quot;house_prices&quot;, as_frame=True)
-
-    for the Ames housing dataset.
-    
-  warnings.warn(msg, category=FutureWarning)
-</pre></div>
-</div>
-</div>
 </div>
 <p>訓練データとテストデータに分割する。</p>
 <div class="cell docutils container">
@@ -643,7 +614,7 @@ setosaが0, versicolorが1, virginicaが31なのでvirginicaと予測する。</
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5564791971697229
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5564791971697227
 0.7325690523735464
 </pre></div>
 </div>
@@ -807,7 +778,7 @@ GradientBoostingClassifierクラスを使えばよい。</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8373454188107912
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.839508802061916
 0.9545303769358543
 </pre></div>
 </div>
@@ -873,7 +844,7 @@ GradientBoostingClassifierクラスを使えばよい。</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8092485191660949
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8080095731186361
 </pre></div>
 </div>
 </div>
@@ -917,7 +888,7 @@ GradientBoostingClassifierクラスを使えばよい。</p>
     <a class='right-next' id="next-link" href="13CompFin.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">第13回 ニューラルネットワーク</p>
+        <p class="prev-next-title">第13回 機械学習入門4 ニューラルネットワーク</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
